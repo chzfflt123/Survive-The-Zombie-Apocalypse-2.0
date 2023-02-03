@@ -8,11 +8,15 @@ class Application(Frame):
         self.create_widgets()
     
     def create_widgets(self):
-        Label(self, text = "Survive the Zombie Apocalypse").grid(row = 0, column = 0, columnspan = 5, sticky = N)
+        title1 = Label(root, text = "Survive the Zombie Apocalypse", font = "Times 40")
+        title1.place(x= 312.5, y=200, anchor=W)
 
-        Button(self, text = "Start", command = self.start).grid(row = 3, column = 3)
-        Button(self, text = "Quit", command = self.quit).grid(row = 3, column = 7)
-    
+        mybutton1 = Button(root, text = "Start", font = "Times 30", width = 15, command = self.start)
+        mybutton1.place(x = 312.5, y = 300, anchor=W)
+
+        mybutton2 = Button(root, text = "Quit", font = "Times 30", width = 15, command = self.quit)
+        mybutton2.place(x = 660, y = 300, anchor=W)
+
     def start():
         pass
     def quit():
