@@ -1,10 +1,10 @@
 from tkinter import *
 import os
 
-class Application():
+class StartPage():
     
     def __init__(self, master):
-        super(Application, self).__init__(master)
+        super(StartPage, self).__init__(master)
         self.grid()
         self.create_widgets()
     
@@ -27,5 +27,5 @@ root = Tk()
 root.geometry("1250x750")
 root.configure(background = "#ffffff")
 root.title("Survive the Zombie Apocalypse")
-app = Application(root)
+app = StartPage(root)
 root.mainloop()

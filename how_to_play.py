@@ -3,7 +3,7 @@ import os
 
 class How_To_Play(Frame):
     def __init__(self, master):
-        super(Application, self).__init__(master)
+        super(How_To_Play, self).__init__(master)
         self.grid()
         self.create_widgets()
         self.current_screen=None
@@ -19,15 +19,9 @@ class How_To_Play(Frame):
 
         quit_button = Button(root, text="Quit", font = "Ariel 20", command=self.quit_game, width=12, height=2)
         quit_button.place(x=725, y=600, anchor=CENTER)
-    
-    def quit_game(self):
-        root.destroy()
-    
-    def next_page(self):
-        self.current_screen = BackgroundInfo()
 
 root = Tk()
 root.title("How To Play")
 root.geometry("1250x750")
-app = Application(root)
+app = How_To_Play(root)
 root.mainloop()
