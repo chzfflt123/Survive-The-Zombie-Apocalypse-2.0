@@ -18,6 +18,7 @@ class Main (object):
         self.root.title ("Start")
         # Creates and displays a Character Selection screen
         self.current_screen = StartPage(master = self.root, callback_on_start = self.onclose_start_page)
+        self.root.geometry("1250x750")
                
     def onclose_start_page (self):
         # Destroys the Character Selection window
@@ -34,7 +35,9 @@ class Main (object):
 
         # Creates and displays a Prepare To Battle screen
         self.current_screen = How_To_Play(master = self.root, callback_on_htp = self.onclose_how_to_play)
-    
+        self.root.geometry("1250x750")
+
+
     def onclose_how_to_play (self):
         ''' 
         This method is called when the user presses the button on the Prepare to Battle screen.
@@ -54,6 +57,7 @@ class Main (object):
 
         # Creates and displays a Battle screen
         self.current_screen = BackgroundInfo(master= self.root,  callback_on_bginfo = self.onclose_bg_info_screen)
+        self.root.geometry("1250x750")
 
     def onclose_bg_info_screen (self):
         # Destroy the entire program's window, which includes the Battle screen.
@@ -66,7 +70,6 @@ def main():
     app.setup_start_page()
     # Run the program!
     app.root.mainloop()
-    app.root.geometry("700x1200")
  
 main()
     
