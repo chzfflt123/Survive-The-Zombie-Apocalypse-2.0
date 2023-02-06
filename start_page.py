@@ -12,7 +12,13 @@ class StartPage(Frame):
         title1.grid(row=0, column=0)
 
         mybutton1 = Button(self, text = "Start", font = "Times 30", width = 15, command = self.start, bg="#ffffff")
-        mybutton1.place(x = 312.5, y = 300, anchor=W)
+        mybutton1.grid(row=1,column=0)
     
     def start(self):
         self.callback_on_start()
+    
+# root = Tk()
+# root.title("Start")
+# root.geometry(1250,750)
+# app = StartPage(root)
+# root.mainloop()
