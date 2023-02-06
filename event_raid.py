@@ -1,28 +1,20 @@
 from tkinter import *
-import os
-
-class EventRaid():
+class EventRaid(Frame):
     
-    def __init__(self, master):
-        super(EventRaid, self).__init__(master)
+    def __init__(self, master, callback_on_start):
+        super().__init__(master)
         self.grid()
         self.create_widgets()
+        self.callback_on_start = callback_on_start
     
     def create_widgets(self):
-        mybutton1 = Button(root, text = "Stay", font = "Times 30", width = 15, command = self.start, bg="#ffffff")
-        mybutton1.place(x = 312.5, y = 300, anchor=W)
+        # self.columnconfigure(0,weight=2)
 
-        mybutton2 = Button(root, text = "Raid", font = "Times 30", width = 15, command = self.quit, bg="#ffffff")
-        mybutton2.place(x = 660, y = 300, anchor=W)
+        mybutton1 = Button(self, text = "Stay", font = "Times 30", width = 15, command = self.start)
+        mybutton1.grid(row=1,column=0)
 
-    def start():
-        pass
-    def quit():
-        root.destroy()
-
-root = Tk()
-root.geometry("1250x750")
-root.configure(background = "#ffffff")
-root.title("Survive the Zombie Apocalypse")
-app = EventRaid(root)
-root.mainloop()
+        mybutton1 = Button(self, text = "Raid", font = "Times 30", width = 15, command = self.start)
+        mybutton1.grid(row=1,column=4)
+    
+    def start(self):
+        self.callback_on_start()
