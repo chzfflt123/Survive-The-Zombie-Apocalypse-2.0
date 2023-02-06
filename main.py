@@ -17,9 +17,9 @@ class Main (object):
         # Changes the window's title
         self.root.title ("Start")
         # Creates and displays a Character Selection screen
-        self.current_screen = StartPage(master = self.root)
+        self.current_screen = StartPage(master = self.root, callback_on_start = self.onclose_start_page)
                
-    def onclose_character_selection (self, selected_char_index):
+    def onclose_start_page (self):
         # Destroys the Character Selection window
         self.current_screen.destroy()
 
@@ -33,7 +33,7 @@ class Main (object):
         self.root.title ("How to Play")
 
         # Creates and displays a Prepare To Battle screen
-        self.current_screen = How_To_Play(master = self.root, callback_on_commence_battle = self.onclose_how_to_play)
+        self.current_screen = How_To_Play(master = self.root, callback_on_htp = self.onclose_how_to_play)
     
     def onclose_how_to_play (self):
         ''' 
@@ -53,7 +53,7 @@ class Main (object):
         self.root.title ("Background Info")
 
         # Creates and displays a Battle screen
-        self.current_screen = BackgroundInfo(master= self.root,  callback_on_exit = self.onclose_bg_info_screen)
+        self.current_screen = BackgroundInfo(master= self.root,  callback_on_bginfo = self.onclose_bg_info_screen)
 
     def onclose_bg_info_screen (self):
         # Destroy the entire program's window, which includes the Battle screen.
@@ -61,11 +61,11 @@ class Main (object):
         
 def main():
     # Create the battle manager, which creates the tkinter window.
-    main = Main()
+    app = Main()
     # The program begins with the Character Selection screen!
-    main.setup_character_selection()
+    app.setup_start_page()
     # Run the program!
-    main.root.mainloop()
+    app.root.mainloop()
  
 main()
     
