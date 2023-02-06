@@ -66,6 +66,7 @@ def main():
     app.setup_start_page()
     # Run the program!
     app.root.mainloop()
+    app.root.geometry("700x1200")
  
 main()
     
