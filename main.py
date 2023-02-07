@@ -3,6 +3,7 @@ import tkinter
 from start_page import StartPage
 from how_to_play import How_To_Play
 from bg_info_screen import BackgroundInfo
+from event_raid import EventRaid
 
 class Main (object):
     def __init__ (self):
@@ -18,6 +19,7 @@ class Main (object):
         self.root.title ("Start")
         # Creates and displays a Character Selection screen
         self.current_screen = StartPage(master = self.root, callback_on_start = self.onclose_start_page)
+        self.root.geometry("1250x750")
                
     def onclose_start_page (self):
         # Destroys the Character Selection window
@@ -34,7 +36,9 @@ class Main (object):
 
         # Creates and displays a Prepare To Battle screen
         self.current_screen = How_To_Play(master = self.root, callback_on_htp = self.onclose_how_to_play)
-    
+        self.root.geometry("1250x750")
+
+
     def onclose_how_to_play (self):
         ''' 
         This method is called when the user presses the button on the Prepare to Battle screen.
@@ -54,8 +58,23 @@ class Main (object):
 
         # Creates and displays a Battle screen
         self.current_screen = BackgroundInfo(master= self.root,  callback_on_bginfo = self.onclose_bg_info_screen)
+        self.root.geometry("1250x750")
 
     def onclose_bg_info_screen (self):
+        # Destroy the entire program's window, which includes the Battle screen.
+        self.root.destroy()
+        self.setup_raid()
+
+    def setup_raid(self):
+        ''' This method is called to set up the Battle screen. '''
+        # Changes the window's title
+        self.root.title ("Raid")
+
+        # Creates and displays a Battle screen
+        self.current_screen = EventRaid(master= self.root,  callback_on_raid = self.onclose_raid)
+        self.root.geometry("1250x750")
+
+    def onclose_raid (self):
         # Destroy the entire program's window, which includes the Battle screen.
         self.root.destroy()
         
@@ -66,7 +85,6 @@ def main():
     app.setup_start_page()
     # Run the program!
     app.root.mainloop()
-    app.root.geometry("700x1200")
  
 main()
     

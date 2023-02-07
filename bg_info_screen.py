@@ -30,8 +30,8 @@ class BackgroundInfo(Frame):
 
         next_button = Button(self, text="Next", font = "Ariel 20", width=12, height=2, bg="#A0A0A0") # add the command later
         next_button.grid(row=7,column=0)
-        quit_button = Button(self, text="Quit", font = "Ariel 20", command=self.quit_game, width=12, height=2)
+        quit_button = Button(self, text="Quit", font = "Ariel 20", command=self.next, width=12, height=2)
         quit_button.grid(row=7,column=1)
     
-    def quit_game(self):
-        self.destroy()
+    def next(self):
+        self.callback_on_bginfo()
