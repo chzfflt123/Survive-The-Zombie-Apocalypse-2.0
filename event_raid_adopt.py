@@ -10,10 +10,10 @@ class EventRaidAdopt(Frame):
     def create_widgets(self):
         # self.columnconfigure(0,weight=2)
 
-        mybutton1 = Button(self, text = "Stay", font = "Times 30", width = 15, command = self.start)
+        mybutton1 = Button(self, text = "Adopt", font = "Times 30", width = 15, command = self.start)
         mybutton1.grid(row=1,column=0)
 
-        mybutton1 = Button(self, text = "Raid", font = "Times 30", width = 15, command = self.start)
+        mybutton1 = Button(self, text = "Abandon", font = "Times 30", width = 15, command = self.start)
         mybutton1.grid(row=1,column=4)
     
     def start(self):
