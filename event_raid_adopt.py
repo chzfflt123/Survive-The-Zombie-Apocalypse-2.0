@@ -1,5 +1,5 @@
 from tkinter import *
-class EventRaid(Frame):
+class EventRaidAdopt(Frame):
     
     def __init__(self, master, callback_on_start):
         super().__init__(master)
