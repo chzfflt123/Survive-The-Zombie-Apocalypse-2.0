@@ -63,6 +63,7 @@ class Main (object):
     def onclose_bg_info_screen (self):
         # Destroy the entire program's window, which includes the Battle screen.
         self.root.destroy()
+        self.setup_raid()
 
     def setup_raid(self):
         ''' This method is called to set up the Battle screen. '''
@@ -73,7 +74,7 @@ class Main (object):
         self.current_screen = EventRaid(master= self.root,  callback_on_raid = self.onclose_raid)
         self.root.geometry("1250x750")
 
-    def onclose_bg_info_screen (self):
+    def onclose_raid (self):
         # Destroy the entire program's window, which includes the Battle screen.
         self.root.destroy()
         
