@@ -34,7 +34,7 @@ class BaseScreen(Frame):
 
         bar2.start(5000)
         tempnext_button = Button(self, text="temporary Next", font = "Ariel 20", width=12, height=2, bg="#A0A0A0", command=self.next)
-        tempnext_button.grid(row=2, column=0)
+        tempnext_button.grid(row=4, column=0)
 
     def next(self):
         self.callback_on_base()
@@ -42,8 +42,8 @@ class BaseScreen(Frame):
     def quit_game(self):
         self.destroy()
 
-root = Tk()
-root.title("Base")
-root.geometry("1250x750")
-app = BaseScreen(root)
-root.mainloop()
+# root = Tk()
+# root.title("Base")
+# root.geometry("1250x750")
+# app = BaseScreen(root)
+# root.mainloop()
