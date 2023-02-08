@@ -5,7 +5,6 @@ class How_To_Play(Frame):
         super(How_To_Play, self).__init__(master)
         self.grid()
         self.create_widgets()
-        self.current_screen=None
         self.callback_on_htp = callback_on_htp
 
     def create_widgets(self):

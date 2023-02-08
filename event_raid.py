@@ -11,10 +11,10 @@ class EventRaid(Frame):
         # self.columnconfigure(0,weight=2)
 
         mybutton1 = Button(self, text = "Stay", font = "Times 30", width = 15)
-        mybutton1.grid(row=1,column=0)
+        mybutton1.grid(row=5,column=0)
 
         mybutton1 = Button(self, text = "Raid", font = "Times 30", width = 15)
-        mybutton1.grid(row=1,column=4)
+        mybutton1.grid(row=5,column=1)
     
     # def start(self):
     #     self.callback_on_start()

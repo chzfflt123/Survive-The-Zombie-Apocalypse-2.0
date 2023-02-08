@@ -4,8 +4,9 @@ class BackgroundInfo(Frame):
     def __init__(self, master, callback_on_bginfo):
         super(BackgroundInfo, self).__init__(master)
         self.grid()
-        self.create_widgets()
         self.callback_on_bginfo = callback_on_bginfo
+        self.create_widgets()
+        
 
     
     def create_widgets(self):
@@ -28,9 +29,9 @@ class BackgroundInfo(Frame):
         text6 = Label(self, text="creatures that can no longer be called \'human\'.", font="Georgia 24", bg=bg_color)
         text6.grid(row=6, column=0, columnspan=2)
 
-        next_button = Button(self, text="Next", font = "Ariel 20", width=12, height=2, bg="#A0A0A0") # add the command later
+        next_button = Button(self, text="Next", font = "Ariel 20", command=self.next, width=12, height=2, bg="#A0A0A0") # add the command later
         next_button.grid(row=7,column=0)
-        quit_button = Button(self, text="Quit", font = "Ariel 20", command=self.next, width=12, height=2)
+        quit_button = Button(self, text="Quit", font = "Ariel 20", width=12, height=2)
         quit_button.grid(row=7,column=1)
     
     def next(self):
