@@ -1,6 +1,7 @@
 from tkinter import * 
 from tkinter import ttk
 from tkinter.ttk import Progressbar
+import time
   
 class BaseScreen(Frame):
     def __init__(self, master):
@@ -10,25 +11,32 @@ class BaseScreen(Frame):
 
     
     def create_widgets(self):
-        style = ttk.Style()
-        style.theme_use('default')
-        style.configure("grey.Horizontal.TProgressbar", background='green')
-        bar = Progressbar(self, length=180, style='grey.Horizontal.TProgressbar')
-        bar['value'] = 50
-        Label(self, text="HEALTH", font="Ariel 22").grid(row=0, column=0, padx = 10)
-        bar.grid(column=1, row=0, padx = 10)
-
-        bar2 = Progressbar(self, length=180, style='grey.Horizontal.TProgressbar')
-        bar2['value'] = 50
-        Label(self, text="Supplies", font="Ariel 22").grid(row=1, column=0, padx = 10)
-        bar2.grid(column=1, row=1, padx = 10)
+        health = ttk.Style()
+        health.theme_use('default')
+        health.configure("health.Horizontal.TProgressbar", background='#00FF2B')
+        
+        supplies = ttk.Style()
+        supplies.theme_use('default')
+        supplies.configure("supplies.Horizontal.TProgressbar", background='#00FF2B')
 
 
-    
+        bar = Progressbar(self, length=300, style='health.Horizontal.TProgressbar')
+        bar['value'] = 95
+        Label(self, text="Health", font="Ariel 10").grid(row=1, column=0, padx=6.5, sticky=W)
+        bar.grid(column=0, row=0, padx = 10, pady=(10, 0), sticky=S)
+
+        bar2 = Progressbar(self, length=300, style='supplies.Horizontal.TProgressbar')
+        bar2['value'] = 100
+        Label(self, text="Supplies", font="Ariel 10").grid(row=3, column=0, padx=6.5, sticky=W)
+        bar2.grid(column=0, row=2, padx = 10, sticky=W)
+
+        bar2.start(5000)
+
     def quit_game(self):
         self.destroy()
 
 root = Tk()
 root.title("Base")
+root.geometry("1250x750")
 app = BaseScreen(root)
 root.mainloop()
