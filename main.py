@@ -77,18 +77,6 @@ class Main (object):
     def onclose_base (self):
         # Destroy the entire program's window, which includes the Battle screen.
         self.current_screen.destroy()
-        self.setup_raid()
-
-    def setup_raid(self):
-        ''' This method is called to set up the Battle screen. '''
-        # Changes the window's title
-        self.root.title ("Raid")
-        # Creates and displays a Battle screen
-        self.current_screen = EventRaid(master= self.root,  callback_on_raid = self.onclose_raid)
-        self.root.geometry("1250x750")
-    
-    def onclose_raid(self):
-        pass
         
 def main():
     # Create the battle manager, which creates the tkinter window.
