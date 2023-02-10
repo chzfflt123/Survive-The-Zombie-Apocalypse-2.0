@@ -3,7 +3,7 @@ import tkinter
 from start_page import StartPage
 from how_to_play import How_To_Play
 from bg_info_screen import BackgroundInfo
-from event_raid import EventRaid
+from event_raid_battle import EventRaidBattle
 from base_screen import BaseScreen
 
 class Main (object):
@@ -71,12 +71,19 @@ class Main (object):
         # Changes the window's title
         self.root.title ("Base")
         # Creates and displays a Battle screen
-        self.current_screen = BaseScreen(master= self.root,  callback_on_base = self.onclose_base)
+        self.current_screen = BaseScreen(master= self.root,  to_battle = self.base_to_battle)
         self.root.geometry("1250x750")
 
-    def onclose_base (self):
+    def base_to_battle (self):
         # Destroy the entire program's window, which includes the Battle screen.
         self.current_screen.destroy()
+        self.setup_battle()
+    
+    def setup_battle(self):
+        self.root.title("Battle")
+        self.current_screen = EventRaidBattle(master=self.root)
+        self.root.geometry("1250x750")
+
         
 def main():
     # Create the battle manager, which creates the tkinter window.

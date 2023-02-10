@@ -5,11 +5,11 @@ from tkinter.ttk import Progressbar
 import time
   
 class BaseScreen(Frame):
-    def __init__(self, master, callback_on_base):
+    def __init__(self, master, to_battle):
         super(BaseScreen, self).__init__(master)
         self.grid()
         self.create_widgets()
-        self.callback_on_base = callback_on_base
+        self.to_battle = to_battle
         """self.x = 1"""
 
     def create_widgets(self):
@@ -33,13 +33,8 @@ class BaseScreen(Frame):
         stay.grid(row=5,column=2,sticky=E)
         # stay.place(x=300,y=300)
 
-        raid = Button(self, text = "Raid", font = "Times 30", width = 20, height=2)
+        raid = Button(self, text = "Raid", font = "Times 30", width = 20, height=2, command=self.to_battle)
         raid.grid(row=5,column=3)
-        tempnext_button = Button(self, text="temporary Next", font = "Ariel 20", width=12, height=2, bg="#A0A0A0", command=self.next)
-        tempnext_button.grid(row=10, column=0)
 
-    def next(self):
-        self.callback_on_base()
-
-    def quit_game(self):
-        self.destroy()
+    def to_battle(self):
+        self.base_to_battle()
