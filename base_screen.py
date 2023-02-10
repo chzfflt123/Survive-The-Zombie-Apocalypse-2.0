@@ -1,6 +1,8 @@
 from tkinter import * 
 from tkinter import ttk
+from tkinter.ttk import * 
 from tkinter.ttk import Progressbar
+import tkinter as tk
 import time
   
 class BaseScreen(Frame):
@@ -9,17 +11,13 @@ class BaseScreen(Frame):
         self.grid()
         self.create_widgets()
         self.callback_on_base = callback_on_base
+        """self.x = 1"""
 
     def create_widgets(self):
-        def step():
-            bar2.step(dir)
-            self.after(50, step)
-
-        def change_dir():
-            global dir
-            dir *= -1
-            self.after(2000, change_dir)
-
+        """def lower():
+            if bar2['value'] > 5:
+                bar2['value'] -= 1
+                self.after(100, lower())"""
         health = ttk.Style()
         health.theme_use('default')
         health.configure("health.Horizontal.TProgressbar", background='#00FF2B')
@@ -32,8 +30,6 @@ class BaseScreen(Frame):
         bar['value'] = 95
         Label(self, text="Health", font="Ariel 10").grid(row=1, column=0, padx=6.5, sticky=W)
         bar.grid(column=0, row=0, padx = 10, pady=(10, 0), sticky=S)
-
-        dir = 1
         
         bar2 = Progressbar(self, length=300, style='supplies.Horizontal.TProgressbar', mode="determinate")
         bar2['value'] = 100
@@ -52,6 +48,8 @@ class BaseScreen(Frame):
 
         raid = Button(self, text = "Raid", font = "Times 30", width = 20, height=2)
         raid.grid(row=5,column=3)
+        tempnext_button = Button(self, text="temporary Next", font = "Ariel 20", width=12, height=2, bg="#A0A0A0", command=self.next)
+        tempnext_button.grid(row=10, column=0)
 
     def next(self):
         self.callback_on_base()
