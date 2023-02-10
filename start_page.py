@@ -9,13 +9,14 @@ class StartPage(Frame):
     
     def create_widgets(self):
 
+        spacing=Label(self,text=" ",height=20)
+        spacing.grid(row=0,column=0)
+
+        title1 = Label(self, text = "Survive the Zombie Apocalypse", font = "Times 40",width=63)
+        title1.grid(row=1, column=0, sticky=S)
+
         mybutton1 = Button(self, text = "Start", font = "Times 30", width = 15, command = self.start)
-        mybutton1.place(x=10, y=10)
-        title1 = Label(self, text = "Survive the Zombie Apocalypse", font = "Times 40")
-        title1.place(x=150, y=150)
-
-
-        
+        mybutton1.grid(row=2, column=0,sticky=N)
     
     def start(self):
         self.callback_on_start()
