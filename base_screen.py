@@ -2,7 +2,6 @@ from tkinter import *
 from tkinter import ttk
 from tkinter.ttk import * 
 from tkinter.ttk import Progressbar
-import tkinter as tk
 import time
   
 class BaseScreen(Frame):
@@ -14,27 +13,15 @@ class BaseScreen(Frame):
         """self.x = 1"""
 
     def create_widgets(self):
-        """def lower():
-            if bar2['value'] > 5:
-                bar2['value'] -= 1
-                self.after(100, lower())"""
-        health = ttk.Style()
-        health.theme_use('default')
-        health.configure("health.Horizontal.TProgressbar", background='#00FF2B')
+        def lower()
         
-        supplies = ttk.Style()
-        supplies.theme_use('default')
-        supplies.configure("supplies.Horizontal.TProgressbar", background='#00FF2B')
+        Label(self, text="Health: ", font="Ariel 16").grid(row=1, column=0, sticky=W)
+        self.health = Label(self, text="100", font="Ariel 16").grid(row=1, column=1, sticky=W)
 
-        bar = Progressbar(self, length=300, style='health.Horizontal.TProgressbar')
-        bar['value'] = 95
-        Label(self, text="Health", font="Ariel 10").grid(row=1, column=0, padx=6.5, sticky=W)
-        bar.grid(column=0, row=0, padx = 10, pady=(10, 0), sticky=S)
-        
-        bar2 = Progressbar(self, length=300, style='supplies.Horizontal.TProgressbar', mode="determinate")
-        bar2['value'] = 100
-        Label(self, text="Supplies", font="Ariel 10").grid(row=3, column=0, padx=6.5, sticky=W)
-        bar2.grid(column=0, row=2, padx = 10, sticky=W)
+        Label(self, text="Supplies: ", font="Ariel 16").grid(row=3, column=0, sticky=W)
+        self.supplies = Label(self, text="100", font="Ariel 16").grid(row=3, column=1, sticky=W)
+
+
 
         step()
         self.after(3000, change_dir)
