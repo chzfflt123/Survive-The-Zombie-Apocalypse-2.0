@@ -13,7 +13,7 @@ class BaseScreen(Frame):
         """self.x = 1"""
 
     def create_widgets(self):
-        def lower()
+        # def lower()
         
         Label(self, text="Health: ", font="Ariel 16").grid(row=1, column=0, sticky=W)
         self.health = Label(self, text="100", font="Ariel 16").grid(row=1, column=1, sticky=W)
