@@ -23,6 +23,18 @@ class BaseScreen(Frame):
 
 
 
+        step()
+        self.after(3000, change_dir)
+
+        vspacing = Label(self, text=" ",height=30)
+        vspacing.grid(row=4,column=2)
+
+        stay = Button(self, text = "Stay", font = "Times 30", width = 20, height=2)
+        stay.grid(row=5,column=2,sticky=E)
+        # stay.place(x=300,y=300)
+
+        raid = Button(self, text = "Raid", font = "Times 30", width = 20, height=2)
+        raid.grid(row=5,column=3)
         tempnext_button = Button(self, text="temporary Next", font = "Ariel 20", width=12, height=2, bg="#A0A0A0", command=self.next)
         tempnext_button.grid(row=10, column=0)
 
