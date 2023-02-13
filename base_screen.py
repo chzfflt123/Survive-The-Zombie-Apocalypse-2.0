@@ -3,11 +3,11 @@ from tkinter import ttk
 from tkinter.ttk import Progressbar
 
 class BaseScreen(Frame):
-    def __init__(self, master, base_to_battle):
+    def __init__(self, master, callback_to_battle):
         super(BaseScreen, self).__init__(master)
         self.grid()
         self.create_widgets()
-        self.base_to_battle = base_to_battle
+        self.callback_to_battle = callback_to_battle
 
     def create_widgets(self):
 
