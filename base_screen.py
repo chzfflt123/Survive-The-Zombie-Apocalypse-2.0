@@ -1,20 +1,15 @@
 from tkinter import * 
 from tkinter import ttk
-from tkinter.ttk import * 
 from tkinter.ttk import Progressbar
-import time
-  
+
 class BaseScreen(Frame):
-    def __init__(self, master, to_battle):
+    def __init__(self, master, base_to_battle):
         super(BaseScreen, self).__init__(master)
         self.grid()
         self.create_widgets()
-        self.to_battle = to_battle
-        self.x = 1
+        self.base_to_battle = base_to_battle
 
     def create_widgets(self):
-        def lower_supplies():
-            bar2['value'] -= 5
         health = ttk.Style()
         health.theme_use('default')
         health.configure("health.Horizontal.TProgressbar", background='#00FF2B')
@@ -23,25 +18,37 @@ class BaseScreen(Frame):
         supplies.theme_use('default')
         supplies.configure("supplies.Horizontal.TProgressbar", background='blue')
 
-        bar = Progressbar(self, length=300, style='health.Horizontal.TProgressbar')
-        bar['value'] = 95
+        self.bar = Progressbar(self, length=350, style='health.Horizontal.TProgressbar')
+        self.bar['value'] = 95
+        self.bar.grid(column=0, row=0, padx = 10, pady=(10, 0), sticky=S)
         Label(self, text="Health", font="Ariel 10").grid(row=1, column=0, padx=6.5, sticky=W)
-        bar.grid(column=0, row=0, padx = 10, pady=(10, 0), sticky=S)
         
-        bar2 = Progressbar(self, length=300, style='supplies.Horizontal.TProgressbar', mode="determinate")
-        bar2['value'] = 100
+        
+        self.bar2 = Progressbar(self, length=350, style='supplies.Horizontal.TProgressbar', mode="determinate")
+        self.bar2['value'] = 100
+        self.bar2.grid(column=0, row=2, padx = 10, sticky=W)
         Label(self, text="Supplies", font="Ariel 10").grid(row=3, column=0, padx=6.5, sticky=W)
-        bar2.grid(column=0, row=2, padx = 10, sticky=W)
+        
 
-        vspacing = Label(self, text=" ",height=30)
+        vspacing = Label(self, text=" ")
         vspacing.grid(row=4,column=2)
 
-        stay = Button(self, text = "Stay", font = "Times 30", width = 20, height=2, command=lower_supplies)
+        stay = Button(self, text = "Stay", width = 20, height=2, command=self.lower_supplies)
         stay.grid(row=5,column=2,sticky=E)
-        # stay.place(x=300,y=300)
-
-        raid = Button(self, text = "Raid", font = "Times 30", width = 20, height=2, command=self.to_battle)
+        
+        raid = Button(self, text = "Raid", width = 20, height=2)
         raid.grid(row=5,column=3)
+        tempnext_button = Button(self, text="temporary Next", font = "Ariel 20", width=12, height=2, bg="#A0A0A0", command=self.base_to_battle)
+        tempnext_button.grid(row=10, column=0)
 
-    def to_battle(self):
+        self.new()
+        self.update()
+
+    def lower_supplies(self):
+        self.bar2['value'] -= 5
+    def new(self):
+        self.bar['value'] = 100
+        self.bar2['value'] = 100
+
+    def base_to_battle(self):
         self.base_to_battle()
