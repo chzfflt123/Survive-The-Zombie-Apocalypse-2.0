@@ -3,11 +3,11 @@ from tkinter import ttk
 from tkinter.ttk import Progressbar
 
 class BaseScreen(Frame):
-    def __init__(self, master, callback_to_battle):
+    def __init__(self, master, callback_on_base):
         super(BaseScreen, self).__init__(master)
         self.grid()
         self.create_widgets()
-        self.callback_to_battle = callback_to_battle
+        self.callback_on_base = callback_on_base
 
     def create_widgets(self):
         # bg = PhotoImage(file = "base_background.jpg")
@@ -37,10 +37,8 @@ class BaseScreen(Frame):
         stay = Button(self, text = "Stay", width = 20, height=2, command=self.lower_supplies)
         stay.grid(row=5,column=2,sticky=E)
         
-        raid = Button(self, text = "Raid", width = 20, height=2)
+        raid = Button(self, text = "Raid", width = 20, height=2, command=self.to_battle)
         raid.grid(row=5,column=3)
-        tempnext_button = Button(self, text="temporary Next", font = "Ariel 20", width=12, height=2, bg="#A0A0A0", command=self.to_battle)
-        tempnext_button.grid(row=10, column=2)
 
         self.update()
 
@@ -49,4 +47,4 @@ class BaseScreen(Frame):
         self.supplieslb['text'] = "Supplies: " + str(self.supplies)
 
     def to_battle(self):
-        self.base_to_battle()
+        self.callback_on_base()
