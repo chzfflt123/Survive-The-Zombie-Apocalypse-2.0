@@ -10,7 +10,6 @@ class BaseScreen(Frame):
         self.grid()
         self.create_widgets()
         self.to_battle = to_battle
-        """self.x = 1"""
 
     def create_widgets(self):
         def lower_supplies():
@@ -33,15 +32,16 @@ class BaseScreen(Frame):
         Label(self, text="Supplies", font="Ariel 10").grid(row=3, column=0, padx=6.5, sticky=W)
         bar2.grid(column=0, row=2, padx = 10, sticky=W)
 
-        vspacing = Label(self, text=" ",height=30)
+        vspacing = Label(self, text=" ")
         vspacing.grid(row=4,column=2)
 
-        stay = Button(self, text = "Stay", font = "Times 30", width = 20, height=2, command=lower_supplies)
+        stay = Button(self, text="Stay", width=20, height=2, command=lower_supplies)
         stay.grid(row=5,column=2,sticky=E)
-        # stay.place(x=300,y=300)
-
-        raid = Button(self, text = "Raid", font = "Times 30", width = 20, height=2, command=self.to_battle)
+        
+        raid = Button(self, text = "Raid", width = 20, height=2)
         raid.grid(row=5,column=3)
+        tempnext_button = Button(self, text="temporary Next", font = "Ariel 20", width=12, height=2, bg="#A0A0A0")
+        tempnext_button.grid(row=10, column=0)
 
     def to_battle(self):
         self.base_to_battle()
