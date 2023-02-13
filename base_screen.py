@@ -39,7 +39,7 @@ class BaseScreen(Frame):
         
         raid = Button(self, text = "Raid", width = 20, height=2)
         raid.grid(row=5,column=3)
-        tempnext_button = Button(self, text="temporary Next", font = "Ariel 20", width=12, height=2, bg="#A0A0A0", command=self.base_to_battle)
+        tempnext_button = Button(self, text="temporary Next", font = "Ariel 20", width=12, height=2, bg="#A0A0A0", command=self.to_battle)
         tempnext_button.grid(row=10, column=2)
 
         self.update()
@@ -48,5 +48,5 @@ class BaseScreen(Frame):
         self.supplies -= 5
         self.supplieslb['text'] = "Supplies: " + str(self.supplies)
 
-    def base_to_battle(self):
+    def to_battle(self):
         self.base_to_battle()
