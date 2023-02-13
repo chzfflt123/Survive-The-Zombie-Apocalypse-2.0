@@ -10,17 +10,17 @@ class BaseScreen(Frame):
         self.callback_to_battle = callback_to_battle
 
     def create_widgets(self):
-        bg = PhotoImage(file = "base_background.jpg")
+        # bg = PhotoImage(file = "base_background.jpg")
         
-        # Create Canvas
-        canvas1 = Canvas(self, width = 1250,
-                        height = 750)
+        # # Create Canvas
+        # canvas1 = Canvas(self, width = 1250,
+        #                 height = 750)
         
-        canvas1.pack(fill = "both", expand = True)
+        # canvas1.pack(fill = "both", expand = True)
         
-        # Display image
-        canvas1.create_image( 0, 0, image = bg, 
-                            anchor = "nw")
+        # # Display image
+        # canvas1.create_image( 0, 0, image = bg, 
+        #                     anchor = "nw")
         self.health=100
         self.supplies=100
 
