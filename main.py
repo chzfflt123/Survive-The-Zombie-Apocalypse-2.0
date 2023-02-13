@@ -71,7 +71,7 @@ class Main (object):
         # Changes the window's title
         self.root.title ("Base")
         # Creates and displays a Battle screen
-        self.current_screen = BaseScreen(master= self.root, base_to_battle = self.base_to_battle)
+        self.current_screen = BaseScreen(master= self.root, to_battle= self.base_to_battle)
         self.root.geometry("1250x750")
 
     def base_to_battle(self):

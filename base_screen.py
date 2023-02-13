@@ -13,6 +13,20 @@ class BaseScreen(Frame):
         self.x = 1
 
     def create_widgets(self):
+
+        # Add image file
+        bg = PhotoImage(file = "base_background.jpg")
+        
+        # Create Canvas
+        canvas1 = Canvas(self, width = 1250,
+                        height = 750)
+        
+        canvas1.pack(fill = "both", expand = True)
+        
+        # Display image
+        canvas1.create_image( 0, 0, image = bg, 
+                            anchor = "nw")
+
         def lower_supplies():
             bar2['value'] -= 5
         health = ttk.Style()
