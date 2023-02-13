@@ -10,24 +10,14 @@ class BaseScreen(Frame):
         self.base_to_battle = base_to_battle
 
     def create_widgets(self):
-        health = ttk.Style()
-        health.theme_use('default')
-        health.configure("health.Horizontal.TProgressbar", background='#00FF2B')
-        
-        supplies = ttk.Style()
-        supplies.theme_use('default')
-        supplies.configure("supplies.Horizontal.TProgressbar", background='blue')
+        self.health=100
+        self.supplies=100
 
-        self.bar = Progressbar(self, length=350, style='health.Horizontal.TProgressbar')
-        self.bar['value'] = 95
-        self.bar.grid(column=0, row=0, padx = 10, pady=(10, 0), sticky=S)
-        Label(self, text="Health", font="Ariel 10").grid(row=1, column=0, padx=6.5, sticky=W)
+        self.healthlb = Label(self, text="Health: " + str(self.health), font="Ariel 18")
+        self.healthlb.grid(row=0, column=0, sticky=W, padx=(5, 10), pady=(5, 0))
         
-        
-        self.bar2 = Progressbar(self, length=350, style='supplies.Horizontal.TProgressbar', mode="determinate")
-        self.bar2['value'] = 100
-        self.bar2.grid(column=0, row=2, padx = 10, sticky=W)
-        Label(self, text="Supplies", font="Ariel 10").grid(row=3, column=0, padx=6.5, sticky=W)
+        self.supplieslb = Label(self, text="Supplies: " + str(self.supplies), font="Ariel 18")
+        self.supplieslb.grid(row=1, column=0, sticky=W, padx=(5, 10))
         
 
         vspacing = Label(self, text=" ")
@@ -39,16 +29,13 @@ class BaseScreen(Frame):
         raid = Button(self, text = "Raid", width = 20, height=2)
         raid.grid(row=5,column=3)
         tempnext_button = Button(self, text="temporary Next", font = "Ariel 20", width=12, height=2, bg="#A0A0A0", command=self.base_to_battle)
-        tempnext_button.grid(row=10, column=0)
+        tempnext_button.grid(row=10, column=2)
 
-        self.new()
         self.update()
 
     def lower_supplies(self):
-        self.bar2['value'] -= 5
-    def new(self):
-        self.bar['value'] = 100
-        self.bar2['value'] = 100
+        self.supplies -= 5
+        self.supplieslb['text'] = "Supplies: " + str(self.supplies)
 
     def base_to_battle(self):
         self.base_to_battle()
