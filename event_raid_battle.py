@@ -9,6 +9,7 @@ class EventRaidBattle(Frame):
     
     def create_widgets(self):
         # self.columnconfigure(0,weight=2)
+        label = Label(self,text="You have a ")
 
         mybutton1 = Button(self, text = "Run", font = "Times 30", width = 15, command = self.start)
         mybutton1.grid(row=1,column=0)

@@ -3,13 +3,24 @@ from tkinter import ttk
 from tkinter.ttk import Progressbar
 
 class BaseScreen(Frame):
-    def __init__(self, master, base_to_battle):
+    def __init__(self, master, callback_to_battle):
         super(BaseScreen, self).__init__(master)
         self.grid()
         self.create_widgets()
-        self.base_to_battle = base_to_battle
+        self.callback_to_battle = callback_to_battle
 
     def create_widgets(self):
+        bg = PhotoImage(file = "base_background.jpg")
+        
+        # Create Canvas
+        canvas1 = Canvas(self, width = 1250,
+                        height = 750)
+        
+        canvas1.pack(fill = "both", expand = True)
+        
+        # Display image
+        canvas1.create_image( 0, 0, image = bg, 
+                            anchor = "nw")
         self.health=100
         self.supplies=100
 
