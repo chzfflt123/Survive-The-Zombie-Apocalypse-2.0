@@ -2,6 +2,7 @@ from tkinter import *
 from tkinter import ttk
 from tkinter.ttk import Progressbar
 
+HEALTH = 100
 class BaseScreen(Frame):
     def __init__(self, master, callback_on_base):
         super(BaseScreen, self).__init__(master)
