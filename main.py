@@ -6,6 +6,10 @@ from bg_info_screen import BackgroundInfo
 from event_raid_battle import EventRaidBattle
 from base_screen import BaseScreen
 
+
+
+
+
 class Main (object):
     def __init__ (self):
         self.root = tkinter.Tk()
@@ -38,6 +42,7 @@ class Main (object):
         # Creates and displays a Prepare To Battle screen
         self.current_screen = How_To_Play(master = self.root, callback_on_htp = self.onclose_how_to_play)
         self.root.geometry("1250x750")
+        
 
 
     def onclose_how_to_play (self):
