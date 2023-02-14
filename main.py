@@ -76,10 +76,11 @@ class Main (object):
         # Changes the window's title
         self.root.title ("Base")
         # Creates and displays a Battle screen
-        self.current_screen = BaseScreen(master= self.root,  to_battle = self.base_to_battle)
+        self.current_screen = BaseScreen(master= self.root, callback_on_base= self.base_to_battle)
         self.root.geometry("1250x750")
+        self.root.config()
 
-    def base_to_battle (self):
+    def base_to_battle(self):
         # Destroy the entire program's window, which includes the Battle screen.
         self.current_screen.destroy()
         self.setup_battle()

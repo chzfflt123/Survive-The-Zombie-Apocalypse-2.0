@@ -1,47 +1,50 @@
 from tkinter import * 
 from tkinter import ttk
-from tkinter.ttk import * 
 from tkinter.ttk import Progressbar
-import time
-  
+
 class BaseScreen(Frame):
-    def __init__(self, master, to_battle):
+    def __init__(self, master, callback_on_base):
         super(BaseScreen, self).__init__(master)
         self.grid()
         self.create_widgets()
-        self.to_battle = to_battle
+        self.callback_on_base = callback_on_base
 
     def create_widgets(self):
-        def lower_supplies():
-            bar2['value'] -= 5
-        health = ttk.Style()
-        health.theme_use('default')
-        health.configure("health.Horizontal.TProgressbar", background='#00FF2B')
+        # bg = PhotoImage(file = "base_background.jpg")
         
-        supplies = ttk.Style()
-        supplies.theme_use('default')
-        supplies.configure("supplies.Horizontal.TProgressbar", background='blue')
+        # # Create Canvas
+        # canvas1 = Canvas(self, width = 1250,
+        #                 height = 750)
+        
+        # canvas1.pack(fill = "both", expand = True)
+        
+        # # Display image
+        # canvas1.create_image( 0, 0, image = bg, 
+        #                     anchor = "nw")
+        self.health=100
+        self.supplies=100
 
-        bar = Progressbar(self, length=300, style='health.Horizontal.TProgressbar')
-        bar['value'] = 95
-        Label(self, text="Health", font="Ariel 10").grid(row=1, column=0, padx=6.5, sticky=W)
-        bar.grid(column=0, row=0, padx = 10, pady=(10, 0), sticky=S)
+        self.healthlb = Label(self, text="Health: " + str(self.health), font="Ariel 18")
+        self.healthlb.grid(row=0, column=0, sticky=W, padx=(5, 10), pady=(5, 0))
         
-        bar2 = Progressbar(self, length=300, style='supplies.Horizontal.TProgressbar', mode="determinate")
-        bar2['value'] = 100
-        Label(self, text="Supplies", font="Ariel 10").grid(row=3, column=0, padx=6.5, sticky=W)
-        bar2.grid(column=0, row=2, padx = 10, sticky=W)
+        self.supplieslb = Label(self, text="Supplies: " + str(self.supplies), font="Ariel 18")
+        self.supplieslb.grid(row=1, column=0, sticky=W, padx=(5, 10))
+        
 
         vspacing = Label(self, text=" ")
         vspacing.grid(row=4,column=2)
 
-        stay = Button(self, text="Stay", width=20, height=2, command=lower_supplies)
+        stay = Button(self, text = "Stay", width = 20, height=2, command=self.lower_supplies)
         stay.grid(row=5,column=2,sticky=E)
         
-        raid = Button(self, text = "Raid", width = 20, height=2)
+        raid = Button(self, text = "Raid", width = 20, height=2, command=self.to_battle)
         raid.grid(row=5,column=3)
-        tempnext_button = Button(self, text="temporary Next", font = "Ariel 20", width=12, height=2, bg="#A0A0A0")
-        tempnext_button.grid(row=10, column=0)
+
+        self.update()
+
+    def lower_supplies(self):
+        self.supplies -= 5
+        self.supplieslb['text'] = "Supplies: " + str(self.supplies)
 
     def to_battle(self):
-        self.base_to_battle()
+        self.callback_on_base()
