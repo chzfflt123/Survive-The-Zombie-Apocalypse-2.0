@@ -2,7 +2,7 @@ from tkinter import *
 
 class How_To_Play(Frame):
     def __init__(self, master, callback_on_htp):
-        super(How_To_Play, self).__init__(master)
+        super().__init__(master)
         self.grid()
         self.create_widgets()
         self.callback_on_htp = callback_on_htp

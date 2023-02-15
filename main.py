@@ -6,10 +6,6 @@ from bg_info_screen import BackgroundInfo
 from event_raid_battle import EventRaidBattle
 from base_screen import BaseScreen
 
-
-
-
-
 class Main (object):
     def __init__ (self):
         self.root = tkinter.Tk()
@@ -78,7 +74,6 @@ class Main (object):
         # Creates and displays a Battle screen
         self.current_screen = BaseScreen(master= self.root, callback_on_base= self.base_to_battle)
         self.root.geometry("1250x750")
-        self.root.config()
 
     def base_to_battle(self):
         # Destroy the entire program's window, which includes the Battle screen.
@@ -87,8 +82,13 @@ class Main (object):
     
     def setup_battle(self):
         self.root.title("Battle")
-        self.current_screen = EventRaidBattle(master=self.root)
+        self.current_screen = EventRaidBattle(master=self.root, callback_on_battle_run = self.battle_to_base)
         self.root.geometry("1250x750")
+    
+    def battle_to_base(self):
+        self.current_screen.destroy()
+        self.setup_base()
+
 
         
 def main():
