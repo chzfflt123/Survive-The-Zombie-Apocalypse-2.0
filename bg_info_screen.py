@@ -10,17 +10,17 @@ class BackgroundInfo(Frame):
 
     
     def create_widgets(self):
-        spacing=Label(self,text=" ",height=3)
-        spacing.grid(row=0,column=1)
+        spacing1=Label(self,text=" ",height=3)
+        spacing1.grid(row=0,column=1)
 
         spacing2=Label(self,text="   ",width=19)
         spacing2.grid(row=0,column=0)
 
-        heading = Label(self, text="Background Information", font="Times 40 bold", fg="black")
+        heading = Label(self, text="Background Information", font="Times 42 bold", fg="black")
         heading.grid(row=1, column=1, columnspan=4)
 
-        spacing=Label(self,text=" ",height=3)
-        spacing.grid(row=2,column=1)
+        spacing3=Label(self,text=" ",height=3)
+        spacing3.grid(row=2,column=1)
 
         padding=12
 
