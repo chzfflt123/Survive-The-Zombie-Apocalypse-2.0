@@ -17,7 +17,7 @@ class BaseScreen(Frame):
         if self.firsttime == True:
             self.health=100
             self.supplies=100
-            self.partymembers=0
+            self.partymembers=1
             self.firsttime = False
         self.healthlb = Label(self, text=f"Health: {str(self.health)}, Number of Party Members: {str(self.partymembers)}", font="Ariel 18")
         self.healthlb.grid(row=0, column=0, sticky=W, padx=(5, 10), pady=(5, 0))
@@ -40,8 +40,16 @@ class BaseScreen(Frame):
         self.update()
 
     def lower_supplies(self):
-        self.supplies -= 5
+        self.supplies -= 5*self.partymembers
+        if self.supplies<0:
+            self.supplies = 0
         self.supplieslb['text'] = "Supplies: " + str(self.supplies)
+        self.health += 5
+        if self.health>100:
+            self.health = 100
+        
+        if self.supplies == 0:
+            self.die()
 
     def to_battle(self):
         self.destroy_base_widgets_for_battle()
@@ -74,7 +82,10 @@ class BaseScreen(Frame):
     
     def create_battle_widgets(self):
         # self.columnconfigure(0,weight=2)
-        self.fighttext = Label(self,text=f"You have a {self.health}% chance of winning. Do you want to fight or run?", font="Times 32")
+        self.percentage = self.health*(1+(self.partymembers-1)/self.partymembers)
+        if self.percentage>100:
+            self.percentage = 100
+        self.fighttext = Label(self,text=f"You have a {self.percentage}% chance of winning. Do you want to fight or run?", font="Times 32")
 
         self.fighttext.grid(row=0, column=0, columnspan=2, sticky=N)
 
@@ -91,13 +102,22 @@ class BaseScreen(Frame):
         self.fought=Label(self,text="")
         self.fought.grid(row=2,column=0)
 
-        if chance<=self.health:
+        self.percentage = self.health*(1+(self.partymembers-1)/self.partymembers)
+        if self.percentage>100:
+            self.percentage = 100
+
+        if chance<=self.percentage:
             self.survive()
         else:
             self.die()
 
         self.okay=Button(self,text=f"Okay", command=self.destroy_battle_widgets_afterfight)
         self.okay.grid(row=3,column=0)
+        self.supplies -= 5*self.partymembers
+        if self.supplies <0:
+            self.supplies = 0
+        if self.supplies == 0:
+            self.die()
     
     def survive(self):
         healthlost=random.randint(1, self.health//8) #random way to calculate health lost when you survive; might change it ??
