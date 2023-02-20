@@ -6,8 +6,6 @@ class BackgroundInfo(Frame):
         self.grid()
         self.callback_on_bginfo = callback_on_bginfo
         self.create_widgets()
-        
-
     
     def create_widgets(self):
         spacing1=Label(self,text=" ",height=3)
