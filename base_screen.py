@@ -6,15 +6,22 @@ class BaseScreen(Frame):
     def __init__(self, master):
         super(BaseScreen, self).__init__(master)
         self.grid()
+        self.firsttime()
         self.create_base_widgets()
+    
+    def firsttime(self):
+        self.firsttime = True
 
     def create_base_widgets(self):
-        self.health=100
-        self.supplies=100
-        self.healthlb = Label(self, text="Health: " + str(self.health), font="Ariel 18")
+        if self.firsttime == True:
+            self.health=100
+            self.supplies=100
+            self.firsttime = False
+        print(str(self.health))
+        self.healthlb = Label(self, text=f"Health: {str(self.health)}", font="Ariel 18")
         self.healthlb.grid(row=0, column=0, sticky=W, padx=(5, 10), pady=(5, 0))
         
-        self.supplieslb = Label(self, text="Supplies: " + str(self.supplies), font="Ariel 18")
+        self.supplieslb = Label(self, text=f"Supplies: {str(self.supplies)}", font="Ariel 18")
         self.supplieslb.grid(row=1, column=0, sticky=W, padx=(5, 10))
         
 
