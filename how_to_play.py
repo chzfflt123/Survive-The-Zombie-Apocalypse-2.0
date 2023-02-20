@@ -11,7 +11,7 @@ class How_To_Play(Frame):
         spacing1=Label(self,text=" ",height=3)
         spacing1.grid(row=0,column=1)
 
-        spacing2=Label(self,text=" ",width=12)
+        spacing2=Label(self,text=" ",width=10)
         spacing2.grid(row=0,column=0)
 
         heading = Label(self, text = "How To Play", font="Times 48 bold",width=31)
