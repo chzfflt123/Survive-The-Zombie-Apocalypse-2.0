@@ -3,7 +3,7 @@
 # like in battle, if you click fight, you can click fight again and again and like it doesn't seem to work
 
 
-from tkinter import * 
+from tkinter import *
 from tkinter import ttk
 from tkinter.ttk import Progressbar
 import random
@@ -18,7 +18,7 @@ class BaseScreen(Frame):
         self.firsttime = True
 
     def create_base_widgets(self):
-        print("create_base_widgets started")
+
         if self.firsttime == True:
             self.health=100
             self.supplies=100
@@ -52,6 +52,8 @@ class BaseScreen(Frame):
         self.health += 5
         if self.health>100:
             self.health = 100
+        self.healthlb['text'] = "Health: " + str(self.health)
+        
 
     def to_battle(self):
         self.destroy_base_widgets_for_battle()

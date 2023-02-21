@@ -1,4 +1,4 @@
-import tkinter
+from tkinter import *
 
 from start_page import StartPage
 from how_to_play import How_To_Play
@@ -7,9 +7,9 @@ from base_screen import BaseScreen
 
 class Main (object):
     def __init__ (self):
-        self.root = tkinter.Tk()
+        self.root = Tk()
         self.current_screen = None
-    
+        
     def setup_start_page (self):
         '''
         This method is called to set up the Character Selection screen. 
@@ -20,6 +20,7 @@ class Main (object):
         # Creates and displays a Character Selection screen
         self.current_screen = StartPage(master = self.root, callback_on_start = self.onclose_start_page)
         self.root.geometry("1250x750")
+        
                
     def onclose_start_page (self):
         # Destroys the Character Selection window
