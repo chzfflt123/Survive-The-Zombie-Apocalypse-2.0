@@ -52,26 +52,23 @@ class BaseScreen(Frame):
         self.health += 5
         if self.health>100:
             self.health = 100
-        self.healthlb['text'] = "Health: " + str(self.health)
+        self.healthlb['text'] = "Health: " + str(self.health) + ", Number of Party Members: " + str(self.partymembers)
+        
         
 
     def to_battle(self):
         self.destroy_base_widgets_for_battle()
-    
-    def destroy_battle_widgets_nofight(self):
-        self.fighttext.destroy()
-        self.run_btn.destroy()
-        self.fight_btn.destroy()
-        self.create_base_widgets()
 
-    def destroy_battle_widgets_afterfight(self):
+    def destroy_battle_widgets(self):
         self.fighttext.destroy()
         self.run_btn.destroy()
         self.fight_btn.destroy()
+        print("destroy_battle_widgets ended")
+    
+    def okay_function_after_battle(self):
+        self.create_base_widgets()
         self.okay.destroy()
         self.fought.destroy()
-        self.create_base_widgets()
-        print("destroy_battle_widgets_afterfight ended")
     
     # BATTLE SCREEN PAGE
 
@@ -93,7 +90,7 @@ class BaseScreen(Frame):
 
         self.fighttext.grid(row=0, column=0, columnspan=2, sticky=N)
 
-        self.run_btn = Button(self, text = "Run", font = "Times 30", width = 15, command = self.destroy_battle_widgets_nofight)
+        self.run_btn = Button(self, text = "Run", font = "Times 30", width = 15, command = self.destroy_battle_widgets)
         self.run_btn.grid(row=1,column=0)
 
         self.fight_btn = Button(self, text = "Fight", font = "Times 30", width = 15, command = self.fight)
@@ -115,7 +112,18 @@ class BaseScreen(Frame):
         else:
             self.die()
 
-        self.okay=Button(self,text=f"Okay", command=self.destroy_battle_widgets_afterfight)
+    
+    def survive(self):
+        healthlost=random.randint(1, self.health//8) #random way to calculate health lost when you survive; might change it ??
+        self.health -= healthlost
+        self.destroy_battle_widgets()
+        self.fought.config(text = f"You fought the zombie and lost {str(healthlost)} health.\n Your health is now at {str(self.health)}.")
+        amount = random.randint(0,50)
+        if amount == 50:
+            self.supplies = 100
+        else:
+            self.supplies += amount
+        self.okay=Button(self,text=f"Okay", command=self.okay_function_after_battle)
         self.okay.grid(row=3,column=0)
         self.supplies -= 5*self.partymembers
         if self.supplies <0:
@@ -123,17 +131,8 @@ class BaseScreen(Frame):
         if self.supplies == 0:
             self.die()
     
-    def survive(self):
-        healthlost=random.randint(1, self.health//8) #random way to calculate health lost when you survive; might change it ??
-        self.health -= healthlost
-        self.fought.config(text = f"You fought the zombie and lost {str(healthlost)} health.\n Your health is now at {str(self.health)}.")
-        amount = random.randint(0,50)
-        if amount == 50:
-            self.supplies = 100
-        else:
-            self.supplies += amount
-    
     def die(self):
+        self.destroy_battle_widgets()
         self.fought.config(text = "you died lol") # placeholder for ending scene
     
     def to_adopt(self):
