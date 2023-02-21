@@ -1,3 +1,8 @@
+#### IMPORTANT
+# is there a way to make it so that if you clicked a button already you cant click it again or smth
+# like in battle, if you click fight, you can click fight again and again and like it doesn't seem to work
+
+
 from tkinter import * 
 from tkinter import ttk
 from tkinter.ttk import Progressbar
@@ -47,9 +52,6 @@ class BaseScreen(Frame):
         self.health += 5
         if self.health>100:
             self.health = 100
-        
-        if self.supplies == 0:
-            self.die()
 
     def to_battle(self):
         self.destroy_base_widgets_for_battle()
@@ -123,6 +125,11 @@ class BaseScreen(Frame):
         healthlost=random.randint(1, self.health//8) #random way to calculate health lost when you survive; might change it ??
         self.health -= healthlost
         self.fought.config(text = f"You fought the zombie and lost {str(healthlost)} health.\n Your health is now at {str(self.health)}.")
+        amount = random.randint(0,50)
+        if amount == 50:
+            self.supplies = 100
+        else:
+            self.supplies += amount
     
     def die(self):
         self.fought.config(text = "you died lol") # placeholder for ending scene
