@@ -24,12 +24,15 @@ class BaseScreen(Frame):
             self.supplies=100
             self.partymembers=1
             self.firsttime = False
-        self.healthlb = Label(self, text=f"Health: {str(self.health)}, Number of Party Members: {str(self.partymembers)}", font="Ariel 18")
+        self.healthlb = Label(self, text=f"Health: {str(self.health)}", font="Ariel 18")
         self.healthlb.grid(row=0, column=0, sticky=W, padx=(5, 10), pady=(5, 0))
-        
+
         self.supplieslb = Label(self, text=f"Supplies: {str(self.supplies)}", font="Ariel 18")
         self.supplieslb.grid(row=1, column=0, sticky=W, padx=(5, 10))
-        
+
+        self.partymemberslb = Label(self,text=f"Number of Party Members: {str(self.partymembers)}", font="Ariel 18")
+        self.partymemberslb.grid(row=2,column=0,sticky=W,padx=(5,10),pady=(5,0))
+
         self.vspacing = Label(self, text=" ")
         self.vspacing.grid(row=5,column=2)
 
@@ -53,7 +56,6 @@ class BaseScreen(Frame):
         if self.health>100:
             self.health = 100
         self.healthlb['text'] = "Health: " + str(self.health) + ", Number of Party Members: " + str(self.partymembers)
-        
         
 
     def to_battle(self):
@@ -86,7 +88,7 @@ class BaseScreen(Frame):
         self.percentage = self.health*(1+(self.partymembers-1)/self.partymembers)
         if self.percentage>100:
             self.percentage = 100
-        self.fighttext = Label(self,text=f"You have a {self.percentage}% chance of winning. Do you want to fight or run?", font="Times 32")
+        self.fighttext = Label(self,text=f"You have a {self.percentage:.1}% chance of winning. Do you want to fight or run?", font="Times 32")
 
         self.fighttext.grid(row=0, column=0, columnspan=2, sticky=N)
 
@@ -149,7 +151,7 @@ class BaseScreen(Frame):
     
     def create_adopt_widgets(self):
         # self.columnconfigure(0,weight=2)
-        self.partytext = Label(self,text=f"You have a {self.health}% chance of winning. Do you want to fight or run?", font="Times 32")
+        self.partytext = Label(self,text=f"Do you want to adopt or leave?", font="Times 32")
 
         self.partytext.grid(row=0, column=0, columnspan=2, sticky=N)
 
