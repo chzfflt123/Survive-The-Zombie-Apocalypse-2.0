@@ -1,6 +1,5 @@
 from tkinter import *
 class StartPage(Frame):
-    
     def __init__(self, master, callback_on_start):
         super().__init__(master)
         self.grid()
