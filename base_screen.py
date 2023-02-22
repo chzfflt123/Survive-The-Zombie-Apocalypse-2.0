@@ -149,7 +149,7 @@ class BaseScreen(Frame):
     
     def create_adopt_widgets(self):
         # self.columnconfigure(0,weight=2)
-        self.partytext = Label(self,text=f"You have a {self.health}% chance of winning. Do you want to fight or run?", font="Times 32")
+        self.partytext = Label(self,text=f"Would you like to take in a new party member?", font="Times 32")
 
         self.partytext.grid(row=0, column=0, columnspan=2, sticky=N)
 
