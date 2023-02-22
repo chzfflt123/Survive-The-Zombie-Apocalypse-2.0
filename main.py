@@ -20,9 +20,7 @@ class Main (object):
         # Creates and displays a Character Selection screen
         self.current_screen = StartPage(master = self.root, callback_on_start = self.onclose_start_page)
         self.root.geometry("1250x750")
-        bg = PhotoImage(file = "zombie.png")
-        bglb = Label(self.root, image = bg)
-        bglb.grid(row=0, column =0)
+        
         
                
     def onclose_start_page (self):
