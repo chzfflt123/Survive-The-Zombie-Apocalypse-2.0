@@ -22,6 +22,7 @@ class Main (object):
         self.root.geometry("1250x750")
         
                
+               
     def onclose_start_page (self):
         # Destroys the Character Selection window
         self.current_screen.destroy()
