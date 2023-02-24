@@ -18,20 +18,38 @@ class BaseScreen(Frame):
         self.firsttime = True
 
     def create_base_widgets(self):
-
+        image_char = PhotoImage(file = "images/background.png")
+        char_lbl=Label(self, image = image_char)
+        char_lbl.x = image_char
+        char_lbl.place(x=0, y=0)
         if self.firsttime == True:
             self.health=100
             self.supplies=100
             self.partymembers=1
             self.firsttime = False
-        self.healthlb = Label(self, text=f"Health: {str(self.health)}", font="Ariel 18")
-        self.healthlb.grid(row=0, column=0, sticky=W, padx=(5, 10), pady=(5, 0))
+        health = ttk.Style()
+        health.theme_use('default')
+        health.configure("health.Horizontal.TProgressbar", background='#00FF2B')
 
-        self.supplieslb = Label(self, text=f"Supplies: {str(self.supplies)}", font="Ariel 18")
-        self.supplieslb.grid(row=1, column=0, sticky=W, padx=(5, 10))
+        supplies = ttk.Style()
+        supplies.theme_use('default')
+        supplies.configure("supplies.Horizontal.TProgressbar", background='blue')
+
+        self.bar = Progressbar(self, length=320, style='health.Horizontal.TProgressbar')
+        self.bar['value'] = self.health
+        self.bar.grid(column=0, row=0, padx = 10, pady=(10, 0), sticky=S)
+        self.healthlb = Label(self, text="Health: " + str(self.health), font="Ariel 10")
+        self.healthlb.grid(row=1, column=0, padx=6.5, sticky=W)
+        
+
+        self.bar2 = Progressbar(self, length=320, style='supplies.Horizontal.TProgressbar', mode="determinate")
+        self.bar2['value'] = self.supplies
+        self.bar2.grid(column=0, row=2, padx = 10, sticky=W)
+        self.supplieslb = Label(self, text="Supplies: "+str(self.supplies), font="Ariel 10")
+        self.supplieslb.grid(row=3, column=0, padx=6.5, sticky=W)
 
         self.partymemberslb = Label(self,text=f"Number of Party Members: {str(self.partymembers)}", font="Ariel 18")
-        self.partymemberslb.grid(row=2,column=0,sticky=W,padx=(5,10),pady=(5,0))
+        self.partymemberslb.grid(row=4,column=0,sticky=W,padx=(5,10),pady=(5,0))
 
         self.vspacing = Label(self, text=" ",height=28)
         self.vspacing.grid(row=5,column=2)
@@ -44,18 +62,19 @@ class BaseScreen(Frame):
 
         self.adopt_btn = Button(self, text = "Adopt", font="Luminari 24",width = 14, height=3, command=self.to_adopt)
         self.adopt_btn.grid(row=6,column=4)
-
-        self.update()
+        self.bar.update()
 
     def lower_supplies(self):
         self.supplies -= 5*self.partymembers
         if self.supplies<=0:
-            self.die_base()
+            self.die()
         self.supplieslb['text'] = "Supplies: " + str(self.supplies)
         self.health += 5
         if self.health>100:
             self.health = 100
         self.healthlb['text'] = "Health: " + str(self.health)
+        self.bar['value'] = self.health
+        self.bar2['value'] = self.supplies
         
 
     def to_battle(self):
@@ -78,6 +97,8 @@ class BaseScreen(Frame):
     # BATTLE SCREEN PAGE
 
     def destroy_base_widgets(self):
+        self.bar.destroy()
+        self.bar2.destroy()
         self.healthlb.destroy()
         self.supplieslb.destroy()
         self.stay.destroy()
