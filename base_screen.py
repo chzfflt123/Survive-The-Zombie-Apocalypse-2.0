@@ -33,16 +33,16 @@ class BaseScreen(Frame):
         self.partymemberslb = Label(self,text=f"Number of Party Members: {str(self.partymembers)}", font="Ariel 18")
         self.partymemberslb.grid(row=2,column=0,sticky=W,padx=(5,10),pady=(5,0))
 
-        self.vspacing = Label(self, text=" ")
+        self.vspacing = Label(self, text=" ",height=28)
         self.vspacing.grid(row=5,column=2)
 
-        self.stay = Button(self, text = "Stay", width = 20, height=2, command=self.lower_supplies)
-        self.stay.grid(row=6,column=2,sticky=E)
+        self.stay = Button(self, text = "Stay", font="Ariel 24", width = 14, height=3, command=self.lower_supplies)
+        self.stay.grid(row=6,column=2,sticky=N)
         
-        self.raid = Button(self, text = "Raid", width = 20, height=2, command=self.to_battle)
+        self.raid = Button(self, text = "Raid", font="Ariel 24",width = 14, height=3, command=self.to_battle)
         self.raid.grid(row=6,column=3)
 
-        self.adopt_btn = Button(self, text = "Adopt", width = 20, height=2, command=self.to_adopt)
+        self.adopt_btn = Button(self, text = "Adopt", font="Ariel 24",width = 14, height=3, command=self.to_adopt)
         self.adopt_btn.grid(row=6,column=4)
 
         self.update()
