@@ -49,28 +49,31 @@ class BaseScreen(Frame):
 
     def lower_supplies(self):
         self.supplies -= 5*self.partymembers
-        if self.supplies<0:
-            self.supplies = 0
+        if self.supplies<=0:
+            self.die()
         self.supplieslb['text'] = "Supplies: " + str(self.supplies)
         self.health += 5
         if self.health>100:
             self.health = 100
-        self.healthlb['text'] = "Health: " + str(self.health) + ", Number of Party Members: " + str(self.partymembers)
+        self.healthlb['text'] = "Health: " + str(self.health)
         
 
     def to_battle(self):
         self.destroy_base_widgets_for_battle()
 
+    def destroy_battle_widgets_for_base(self):
+        self.destroy_battle_widgets()
+        self.create_base_widgets()
+
     def destroy_battle_widgets(self):
         self.fighttext.destroy()
         self.run_btn.destroy()
         self.fight_btn.destroy()
-        print("destroy_battle_widgets ended")
     
-    def okay_function_after_battle(self):
-        self.create_base_widgets()
+    def destroy_okay(self):
         self.okay.destroy()
         self.fought.destroy()
+        self.create_base_widgets()
     
     # BATTLE SCREEN PAGE
 
@@ -81,18 +84,22 @@ class BaseScreen(Frame):
         self.raid.destroy()
         self.vspacing.destroy()
         self.adopt_btn.destroy()
+        self.partymemberslb.destroy()
         self.create_battle_widgets()
+
     
     def create_battle_widgets(self):
         # self.columnconfigure(0,weight=2)
+        print(self.health)
+        print(self.partymembers)
         self.percentage = self.health*(1+(self.partymembers-1)/self.partymembers)
         if self.percentage>100:
             self.percentage = 100
-        self.fighttext = Label(self,text=f"You have a {self.percentage:.1}% chance of winning. Do you want to fight or run?", font="Times 32")
+        self.fighttext = Label(self,text=f"You have a {self.percentage:.1f}% chance of winning. Do you want to fight or run?", font="Times 32")
 
         self.fighttext.grid(row=0, column=0, columnspan=2, sticky=N)
 
-        self.run_btn = Button(self, text = "Run", font = "Times 30", width = 15, command = self.destroy_battle_widgets)
+        self.run_btn = Button(self, text = "Run", font = "Times 30", width = 15, command = self.destroy_battle_widgets_for_base)
         self.run_btn.grid(row=1,column=0)
 
         self.fight_btn = Button(self, text = "Fight", font = "Times 30", width = 15, command = self.fight)
@@ -103,7 +110,7 @@ class BaseScreen(Frame):
         chance=random.randint(0,100)
 
         self.fought=Label(self,text="")
-        self.fought.grid(row=2,column=0)
+        self.fought.grid(row=0,column=0)
 
         self.percentage = self.health*(1+(self.partymembers-1)/self.partymembers)
         if self.percentage>100:
@@ -116,22 +123,18 @@ class BaseScreen(Frame):
 
     
     def survive(self):
+        self.destroy_battle_widgets()
         healthlost=random.randint(1, self.health//8) #random way to calculate health lost when you survive; might change it ??
         self.health -= healthlost
-        self.destroy_battle_widgets()
-        self.fought.config(text = f"You fought the zombie and lost {str(healthlost)} health.\n Your health is now at {str(self.health)}.")
         amount = random.randint(0,50)
-        if amount == 50:
-            self.supplies = 100
-        else:
-            self.supplies += amount
-        self.okay=Button(self,text=f"Okay", command=self.okay_function_after_battle)
-        self.okay.grid(row=3,column=0)
-        self.supplies -= 5*self.partymembers
-        if self.supplies <0:
-            self.supplies = 0
-        if self.supplies == 0:
-            self.die()
+        self.supplies += amount
+        if self.supplies >= 100:
+            self.supplies=100
+        
+        self.fought.config(text = f"You fought the zombie and lost {str(healthlost)} health.\n Your health is now at {str(self.health)}.\nYou received {amount} supplies. Your supplies is now at {str(self.supplies)}")
+
+        self.okay=Button(self,text=f"Okay", command=self.destroy_okay)
+        self.okay.grid(row=1,column=0)
     
     def die(self):
         self.destroy_battle_widgets()
@@ -147,11 +150,12 @@ class BaseScreen(Frame):
         self.raid.destroy()
         self.vspacing.destroy()
         self.adopt_btn.destroy()
+        self.partymemberslb.destroy()
         self.create_adopt_widgets()
     
     def create_adopt_widgets(self):
         # self.columnconfigure(0,weight=2)
-        self.partytext = Label(self,text=f"Do you want to adopt or leave?", font="Times 32")
+        self.partytext = Label(self,text=f"Do you want to adopt or leave? You currently have {self.partymembers} member(s) in your party.", font="Times 24")
 
         self.partytext.grid(row=0, column=0, columnspan=2, sticky=N)
 
@@ -165,6 +169,8 @@ class BaseScreen(Frame):
         self.partytext.destroy()
         self.leave_btn.destroy()
         self.adopt_btn.destroy()
+    def destroy_adopt_widgets_noadopt_to_base(self):
+        self.destroy_adopt_widgets_noadopt()
         self.create_base_widgets()
     
     def destroy_adopt_widgets_afteradopt(self):
@@ -180,14 +186,13 @@ class BaseScreen(Frame):
     def adopt(self):
         print("adopted")
         self.emptylabel=Label(self,text="")
-        self.emptylabel.grid(row=2,column=0)
-
+        self.emptylabel.grid(row=0,column=0)
+        self.destroy_adopt_widgets_noadopt()
         self.new_party_member()
-
         self.okay1=Button(self,text=f"Okay", command=self.destroy_adopt_widgets_afteradopt)
-        self.okay1.grid(row=3,column=0)
+        self.okay1.grid(row=1,column=0)
     
     def new_party_member(self):
         self.partymembers +=1
-        self.emptylabel.config(text = f"You adopted a new party member!")
+        self.emptylabel.config(text = f"A new member joined your party! There are now {self.partymembers} members in your party.")
 
