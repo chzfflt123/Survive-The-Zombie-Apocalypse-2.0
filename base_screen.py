@@ -35,15 +35,15 @@ class BaseScreen(Frame):
         supplies.theme_use('default')
         supplies.configure("supplies.Horizontal.TProgressbar", background='blue')
 
-        self.bar = Progressbar(self, length=300, style='health.Horizontal.TProgressbar')
+        self.bar = Progressbar(self, length=320, style='health.Horizontal.TProgressbar')
         self.bar['value'] = self.health
         self.bar.grid(column=0, row=0, padx = 10, pady=(10, 0), sticky=S)
         self.healthlb = Label(self, text="Health: " + str(self.health), font="Ariel 10")
         self.healthlb.grid(row=1, column=0, padx=6.5, sticky=W)
         
 
-        self.bar2 = Progressbar(self, length=300, style='supplies.Horizontal.TProgressbar', mode="determinate")
-        self.bar2['value'] = 100
+        self.bar2 = Progressbar(self, length=320, style='supplies.Horizontal.TProgressbar', mode="determinate")
+        self.bar2['value'] = self.supplies
         self.bar2.grid(column=0, row=2, padx = 10, sticky=W)
         self.supplieslb = Label(self, text="Supplies: "+str(self.supplies), font="Ariel 10")
         self.supplieslb.grid(row=3, column=0, padx=6.5, sticky=W)
@@ -54,17 +54,16 @@ class BaseScreen(Frame):
         self.vspacing = Label(self, text=" ",height=28)
         self.vspacing.grid(row=5,column=2)
 
-        self.stay = Button(self, text = "Stay", font="Ariel 24", width = 14, height=3, command=self.lower_supplies)
+        self.stay = Button(self, text = "Stay", font="Luminari 24", width = 14, height=3, command=self.lower_supplies)
         self.stay.grid(row=6,column=2,sticky=N)
         
-        self.raid = Button(self, text = "Raid", font="Ariel 24",width = 14, height=3, command=self.to_battle)
+        self.raid = Button(self, text = "Raid", font="Luminari 24",width = 14, height=3, command=self.to_battle)
         self.raid.grid(row=6,column=3)
 
         self.adopt_btn = Button(self, text = "Adopt", font="Ariel 24",width = 14, height=3, command=self.to_adopt)
         self.adopt_btn.config(bg = "transparent")
         self.adopt_btn.grid(row=6,column=4)
-
-        self.update()
+        self.bar.update()
 
     def lower_supplies(self):
         self.supplies -= 5*self.partymembers
