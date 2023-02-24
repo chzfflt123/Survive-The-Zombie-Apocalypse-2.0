@@ -21,7 +21,6 @@ class Main (object):
         self.current_screen = StartPage(master = self.root, callback_on_start = self.onclose_start_page)
         self.root.geometry("1250x750")
         
-        
                
     def onclose_start_page (self):
         # Destroys the Character Selection window

@@ -8,7 +8,6 @@ class StartPage(Frame):
         self.callback_on_start = callback_on_start
     
     def create_widgets(self):
-
         spacing=Label(self,text=" ",height=19)
         spacing.grid(row=0,column=0)
 
