@@ -14,7 +14,7 @@ class How_To_Play(Frame):
         spacing2=Label(self,text=" ",width=10)
         spacing2.grid(row=0,column=0)
 
-        heading = Label(self, text = "How To Play", font="Times 48 bold",width=31)
+        heading = Label(self, text = "How To Play", font="Luminari 48 bold",width=31)
         heading.grid(row=1, column=1,sticky=N)
 
         padding = 12
@@ -38,7 +38,7 @@ class How_To_Play(Frame):
         spacing4=Label(self,text=" ",height=6)
         spacing4.grid(row=9,column=1)
     
-        next_button = Button(self, text="Next", font = "Ariel 20", width=12, height=2, bg="#A0A0A0", command=self.next)
+        next_button = Button(self, text="Next", font = "Luminari 20", width=12, height=2, bg="#A0A0A0", command=self.next)
         next_button.grid(row=10, column=1,sticky=N)
     
     def next(self):

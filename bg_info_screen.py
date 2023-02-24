@@ -14,8 +14,8 @@ class BackgroundInfo(Frame):
         spacing2=Label(self,text="     ",width=20)
         spacing2.grid(row=0,column=0)
 
-        heading = Label(self, text="Background Information", font="Times 42 bold", fg="black")
-        heading.grid(row=1, column=1, columnspan=4)
+        heading = Label(self, text="Background Information", font="Luminari 42 bold", fg="black",width=35)
+        heading.grid(row=1, column=1)
 
         spacing3=Label(self,text=" ",height=3)
         spacing3.grid(row=2,column=1)
@@ -34,16 +34,14 @@ class BackgroundInfo(Frame):
         text5.grid(row=7, column=1, columnspan=4, pady=(0, padding))
         text6 = Label(self, text="who were bitten, then took the form of more horrifying creatures that can no", font="Georgia 24")
         text6.grid(row=8, column=1, columnspan=4, pady=(0, padding))
-        text7 = Label(self, text="longer be called \'human\'.", font="Georgia 24")
+        text7 = Label(self, text="longer be called \'human\'.", font="Ariel 24")
         text7.grid(row=9, column=1, columnspan=4, pady=(0, padding))
 
         spacing=Label(self,text=" ",height=6)
         spacing.grid(row=10,column=1)
 
-        next_button = Button(self, text="Next", font = "Ariel 20", command=self.next, width=12, height=2, bg="#A0A0A0") # add the command later
-        next_button.grid(row=11,column=1, padx=(243, 0))
-        quit_button = Button(self, text="Quit", font = "Ariel 20", width=12, height=2)
-        quit_button.grid(row=11,column=4, padx=(0, 243))
+        next_button = Button(self, text="Next", font = "Luminari 20", command=self.next, width=12, height=2, bg="#A0A0A0") # add the command later
+        next_button.grid(row=11,column=1,sticky=N)
     
     def next(self):
         self.callback_on_bginfo()

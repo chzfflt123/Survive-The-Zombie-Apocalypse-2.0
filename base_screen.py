@@ -36,13 +36,13 @@ class BaseScreen(Frame):
         self.vspacing = Label(self, text=" ",height=28)
         self.vspacing.grid(row=5,column=2)
 
-        self.stay = Button(self, text = "Stay", font="Ariel 24", width = 14, height=3, command=self.lower_supplies)
+        self.stay = Button(self, text = "Stay", font="Luminari 24", width = 14, height=3, command=self.lower_supplies)
         self.stay.grid(row=6,column=2,sticky=N)
         
-        self.raid = Button(self, text = "Raid", font="Ariel 24",width = 14, height=3, command=self.to_battle)
+        self.raid = Button(self, text = "Raid", font="Luminari 24",width = 14, height=3, command=self.to_battle)
         self.raid.grid(row=6,column=3)
 
-        self.adopt_btn = Button(self, text = "Adopt", font="Ariel 24",width = 14, height=3, command=self.to_adopt)
+        self.adopt_btn = Button(self, text = "Adopt", font="Luminari 24",width = 14, height=3, command=self.to_adopt)
         self.adopt_btn.grid(row=6,column=4)
 
         self.update()
