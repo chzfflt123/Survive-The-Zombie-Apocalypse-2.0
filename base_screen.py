@@ -65,13 +65,13 @@ class BaseScreen(Frame):
     def lower_supplies(self):
         self.supplies -= 5*self.partymembers
         if self.supplies<=0:
-            self.die_base()
+            self.die()
         self.supplieslb['text'] = "Supplies: " + str(self.supplies)
         self.health += 5
         if self.health>100:
             self.health = 100
         self.healthlb['text'] = "Health: " + str(self.health)
-        self.bar["value"] = self.health
+        self.bar['value'] = self.health
         self.bar2['value'] = self.supplies
         
 
@@ -95,6 +95,8 @@ class BaseScreen(Frame):
     # BATTLE SCREEN PAGE
 
     def destroy_base_widgets(self):
+        self.bar.destroy()
+        self.bar2.destroy()
         self.healthlb.destroy()
         self.supplieslb.destroy()
         self.stay.destroy()
