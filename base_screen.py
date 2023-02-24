@@ -24,14 +24,29 @@ class BaseScreen(Frame):
             self.supplies=100
             self.partymembers=1
             self.firsttime = False
-        self.healthlb = Label(self, text=f"Health: {str(self.health)}", font="Ariel 18")
-        self.healthlb.grid(row=0, column=0, sticky=W, padx=(5, 10), pady=(5, 0))
+        health = ttk.Style()
+        health.theme_use('default')
+        health.configure("health.Horizontal.TProgressbar", background='#00FF2B')
 
-        self.supplieslb = Label(self, text=f"Supplies: {str(self.supplies)}", font="Ariel 18")
-        self.supplieslb.grid(row=1, column=0, sticky=W, padx=(5, 10))
+        supplies = ttk.Style()
+        supplies.theme_use('default')
+        supplies.configure("supplies.Horizontal.TProgressbar", background='blue')
+
+        self.bar = Progressbar(self, length=300, style='health.Horizontal.TProgressbar')
+        self.bar['value'] = self.health
+        self.bar.grid(column=0, row=0, padx = 10, pady=(10, 0), sticky=S)
+        self.healthlb = Label(self, text="Health: " + str(self.health), font="Ariel 10")
+        self.healthlb.grid(row=1, column=0, padx=6.5, sticky=W)
+        
+
+        self.bar2 = Progressbar(self, length=300, style='supplies.Horizontal.TProgressbar', mode="determinate")
+        self.bar2['value'] = 100
+        self.bar2.grid(column=0, row=2, padx = 10, sticky=W)
+        self.supplieslb = Label(self, text="Supplies: "+str(self.supplies), font="Ariel 10")
+        self.supplieslb.grid(row=3, column=0, padx=6.5, sticky=W)
 
         self.partymemberslb = Label(self,text=f"Number of Party Members: {str(self.partymembers)}", font="Ariel 18")
-        self.partymemberslb.grid(row=2,column=0,sticky=W,padx=(5,10),pady=(5,0))
+        self.partymemberslb.grid(row=4,column=0,sticky=W,padx=(5,10),pady=(5,0))
 
         self.vspacing = Label(self, text=" ")
         self.vspacing.grid(row=5,column=2)
@@ -56,6 +71,8 @@ class BaseScreen(Frame):
         if self.health>100:
             self.health = 100
         self.healthlb['text'] = "Health: " + str(self.health)
+        self.bar["value"] = self.health
+        self.bar2['value'] = self.supplies
         
 
     def to_battle(self):
@@ -78,6 +95,8 @@ class BaseScreen(Frame):
     # BATTLE SCREEN PAGE
 
     def destroy_base_widgets_for_battle(self):
+        self.bar.destroy()
+        self.bar2.destroy()
         self.healthlb.destroy()
         self.supplieslb.destroy()
         self.stay.destroy()
