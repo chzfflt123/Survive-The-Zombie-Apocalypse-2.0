@@ -50,7 +50,7 @@ class BaseScreen(Frame):
     def lower_supplies(self):
         self.supplies -= 5*self.partymembers
         if self.supplies<=0:
-            self.die()
+            self.die_base()
         self.supplieslb['text'] = "Supplies: " + str(self.supplies)
         self.health += 5
         if self.health>100:
@@ -77,16 +77,18 @@ class BaseScreen(Frame):
     
     # BATTLE SCREEN PAGE
 
-    def destroy_base_widgets_for_battle(self):
+    def destroy_base_widgets(self):
         self.healthlb.destroy()
         self.supplieslb.destroy()
         self.stay.destroy()
         self.raid.destroy()
         self.vspacing.destroy()
         self.adopt_btn.destroy()
-        self.partymemberslb.destroy()
-        self.create_battle_widgets()
+        self.partymemberslb.destroy()     
 
+    def destroy_base_widgets_for_battle(self):
+        self.destroy_base_widgets()
+        self.create_battle_widgets()
     
     def create_battle_widgets(self):
         # self.columnconfigure(0,weight=2)
@@ -119,14 +121,14 @@ class BaseScreen(Frame):
         if chance<=self.percentage:
             self.survive()
         else:
-            self.die()
+            self.die_battle()
 
     
     def survive(self):
         self.destroy_battle_widgets()
         healthlost=random.randint(1, self.health//8) #random way to calculate health lost when you survive; might change it ??
         self.health -= healthlost
-        amount = random.randint(0,50)
+        amount = random.randint(0,20)
         self.supplies += amount
         if self.supplies >= 100:
             self.supplies=100
@@ -136,21 +138,21 @@ class BaseScreen(Frame):
         self.okay=Button(self,text=f"Okay", command=self.destroy_okay)
         self.okay.grid(row=1,column=0)
     
-    def die(self):
+    def die_base(self):
+        self.destroy_base_widgets()
+        self.died_base=Label(self,text="you died from low supplies lol")
+        self.died_base.grid(row=0,column=0)
+
+    def die_battle(self):
         self.destroy_battle_widgets()
-        self.fought.config(text = "you died lol") # placeholder for ending scene
-    
+        self.died_battle=Label(self,text = "you died in battle lol")
+        self.died_battle.grid(row=0,column=0)
+
     def to_adopt(self):
         self.destroy_base_widgets_for_adopt()
     
     def destroy_base_widgets_for_adopt(self):
-        self.healthlb.destroy()
-        self.supplieslb.destroy()
-        self.stay.destroy()
-        self.raid.destroy()
-        self.vspacing.destroy()
-        self.adopt_btn.destroy()
-        self.partymemberslb.destroy()
+        self.destroy_base_widgets()
         self.create_adopt_widgets()
     
     def create_adopt_widgets(self):
@@ -159,7 +161,7 @@ class BaseScreen(Frame):
 
         self.partytext.grid(row=0, column=0, columnspan=2, sticky=N)
 
-        self.leave_btn = Button(self, text = "Leave", font = "Times 30", width = 15, command = self.destroy_adopt_widgets_noadopt)
+        self.leave_btn = Button(self, text = "Leave", font = "Times 30", width = 15, command = self.destroy_adopt_widgets_noadopt_to_base)
         self.leave_btn.grid(row=1,column=0)
 
         self.adopt_btn = Button(self, text = "Adopt", font = "Times 30", width = 15, command = self.adopt)
