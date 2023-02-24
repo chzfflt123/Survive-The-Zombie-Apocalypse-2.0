@@ -18,7 +18,10 @@ class BaseScreen(Frame):
         self.firsttime = True
 
     def create_base_widgets(self):
-
+        image_char = PhotoImage(file = "images/background.png")
+        char_lbl=Label(self, image = image_char)
+        char_lbl.x = image_char
+        char_lbl.place(x=0, y=0)
         if self.firsttime == True:
             self.health=100
             self.supplies=100
