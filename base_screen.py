@@ -60,7 +60,8 @@ class BaseScreen(Frame):
         self.raid = Button(self, text = "Raid", font="Luminari 24",width = 14, height=3, command=self.to_battle)
         self.raid.grid(row=6,column=3)
 
-        self.adopt_btn = Button(self, text = "Adopt", font="Luminari 24",width = 14, height=3, command=self.to_adopt)
+        self.adopt_btn = Button(self, text = "Adopt", font="Ariel 24",width = 14, height=3, command=self.to_adopt)
+        self.adopt_btn.config(bg = "transparent")
         self.adopt_btn.grid(row=6,column=4)
         self.bar.update()
 

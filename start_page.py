@@ -16,6 +16,7 @@ class StartPage(Frame):
 
         title1 = Label(self, text = "Survive the Zombie Apocalypse", font = ("Luminari 40"),width=52)
         title1.grid(row=1, column=0, sticky=N)
+        
 
         spacing2=Label(self,text=" ",height=1)
         spacing2.grid(row=2,column=0)
