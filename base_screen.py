@@ -13,15 +13,16 @@ class BaseScreen(Frame):
         self.grid()
         self.firsttime()
         self.create_base_widgets()
+        
     
     def firsttime(self):
         self.firsttime = True
 
     def create_base_widgets(self):
-        image_char = PhotoImage(file = "images/background.png")
-        char_lbl=Label(self, image = image_char)
-        char_lbl.x = image_char
-        char_lbl.place(x=0, y=0)
+        self.image_char = PhotoImage(file = "images/background_base.png")
+        self.char_lbl=Label(self, image = self.image_char)
+        self.char_lbl.x = self.image_char
+        self.char_lbl.place(x=0, y=0)
         if self.firsttime == True:
             self.health=100
             self.supplies=100
@@ -56,6 +57,7 @@ class BaseScreen(Frame):
 
         self.stay = Button(self, text = "Stay", font="Luminari 24", width = 14, height=3, command=self.lower_supplies)
         self.stay.grid(row=6,column=2,sticky=N)
+        
         
         self.raid = Button(self, text = "Raid", font="Luminari 24",width = 14, height=3, command=self.to_battle)
         self.raid.grid(row=6,column=3)
@@ -105,7 +107,9 @@ class BaseScreen(Frame):
         self.raid.destroy()
         self.vspacing.destroy()
         self.adopt_btn.destroy()
-        self.partymemberslb.destroy()     
+        self.partymemberslb.destroy()
+        self.char_lbl.destroy()   
+  
 
     def destroy_base_widgets_for_battle(self):
         self.destroy_base_widgets()
