@@ -1,13 +1,12 @@
 #### IMPORTANT
 # is there a way to make it so that if you clicked a button already you cant click it again or smth
 # like in battle, if you click fight, you can click fight again and again and like it doesn't seem to work
-
-
 from tkinter import *
 from tkinter import ttk
 from tkinter.ttk import Progressbar
-import random
+import random  
 class BaseScreen(Frame):
+    
     def __init__(self, master):
         super(BaseScreen, self).__init__(master)
         self.grid()
@@ -67,7 +66,7 @@ class BaseScreen(Frame):
     def lower_supplies(self):
         self.supplies -= 5*self.partymembers
         if self.supplies<=0:
-            self.die()
+            self.die_base()
         self.supplieslb['text'] = "Supplies: " + str(self.supplies)
         self.health += 5
         if self.health>100:
