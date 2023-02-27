@@ -35,7 +35,7 @@ class How_To_Play(Frame):
         info7 = Label(self,text="If you survive long enough you live!", font="Ariel 26",width=62)
         info7.grid(row=8, column=1, sticky=W, pady=(0, padding))
 
-        spacing4=Label(self,text=" ",height=6)
+        spacing4=Label(self,text=" ",height=3)
         spacing4.grid(row=9,column=1)
     
         next_button = Button(self, text="Next", font = "Luminari 20", width=12, height=2, bg="#A0A0A0", command=self.next)

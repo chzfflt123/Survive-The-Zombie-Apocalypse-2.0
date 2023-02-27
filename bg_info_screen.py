@@ -37,7 +37,7 @@ class BackgroundInfo(Frame):
         text7 = Label(self, text="longer be called \'human\'.", font="Ariel 24")
         text7.grid(row=9, column=1, columnspan=4, pady=(0, padding))
 
-        spacing=Label(self,text=" ",height=6)
+        spacing=Label(self,text=" ",height=3)
         spacing.grid(row=10,column=1)
 
         next_button = Button(self, text="Next", font = "Luminari 20", command=self.next, width=12, height=2, bg="#A0A0A0") # add the command later
