@@ -67,7 +67,7 @@ class BaseScreen(Frame):
     def lower_supplies(self):
         self.supplies -= 5*self.partymembers
         if self.supplies<=0:
-            self.die()
+            self.die_base()
         self.supplieslb['text'] = "Supplies: " + str(self.supplies)
         self.health += 5
         if self.health>100:
