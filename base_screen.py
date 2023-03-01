@@ -37,14 +37,14 @@ class BaseScreen(Frame):
         supplies.theme_use('default')
         supplies.configure("supplies.Horizontal.TProgressbar", background='blue')
 
-        self.bar = Progressbar(self, length=320, style='health.Horizontal.TProgressbar')
+        self.bar = Progressbar(self, length=360, style='health.Horizontal.TProgressbar')
         self.bar['value'] = self.health
         self.bar.grid(column=0, row=0, padx = 10, pady=(10, 0), sticky=S)
         self.healthlb = Label(self, text="Health: " + str(self.health), font="Ariel 10")
         self.healthlb.grid(row=1, column=0, padx=6.5, sticky=W)
         
 
-        self.bar2 = Progressbar(self, length=320, style='supplies.Horizontal.TProgressbar', mode="determinate")
+        self.bar2 = Progressbar(self, length=360, style='supplies.Horizontal.TProgressbar', mode="determinate")
         self.bar2['value'] = self.supplies
         self.bar2.grid(column=0, row=2, padx = 10, sticky=W)
         self.supplieslb = Label(self, text="Supplies: "+str(self.supplies), font="Ariel 10")
@@ -96,10 +96,14 @@ class BaseScreen(Frame):
         self.fighttext.destroy()
         self.run_btn.destroy()
         self.fight_btn.destroy()
+        self.battle_vspacing.destroy()
+        self.battle_vspacing2.destroy()
     
     def destroy_okay(self):
         self.okay.destroy()
         self.fought.destroy()
+        self.okay_vspacing.destroy()
+        self.okay_spacing2.destroy()
         self.create_base_widgets()
     
     # BATTLE SCREEN PAGE
@@ -114,7 +118,7 @@ class BaseScreen(Frame):
         self.vspacing.destroy()
         self.adopt_btn.destroy()
         self.partymemberslb.destroy()
-        self.char_lbl.destroy()   
+        self.char_lbl.destroy()
   
 
     def destroy_base_widgets_for_battle(self):
@@ -184,13 +188,16 @@ class BaseScreen(Frame):
         if self.supplies >= 100:
             self.supplies=100
         
-        self.okay_vspacing=Label(self,text="",height=8)
+        self.okay_vspacing=Label(self,text="",height=13)
         self.okay_vspacing.grid(row=0,column=0,sticky=E)
 
         self.fought.config(text = f"You fought the zombie and lost {str(healthlost)} health.\n Your health is now at {str(self.health)}.\n\nYou received {amount} supplies.\nYour supplies is now at {str(self.supplies)}",font="Luminari 30",width=70)
 
+        self.okay_spacing2=Label(self, text="", height=2)
+        self.okay_spacing2.grid(row=2, column=0, sticky=E)
+
         self.okay=Button(self,text="Okay", font="Luminari 30", command=self.destroy_okay,width=20,height=2)
-        self.okay.grid(row=2,column=0)
+        self.okay.grid(row=3,column=0)
     
     def die_base(self):
         self.destroy_base_widgets()
@@ -246,9 +253,10 @@ class BaseScreen(Frame):
         self.adopt_btn.destroy()
         self.emptylabel.destroy()
         self.okay1.destroy()
+        self.adopt_spacing1.destroy()
+        self.adopt_spacing2.destroy()
         self.create_base_widgets()
-        print
-        ("destroy_adopt_widgets_afteradopt ended")
+        print("destroy_adopt_widgets_afteradopt ended")
 
     def adopt(self):
         print("adopted")
