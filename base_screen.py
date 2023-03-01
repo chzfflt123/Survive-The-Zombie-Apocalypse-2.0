@@ -65,7 +65,6 @@ class BaseScreen(Frame):
 
         self.adopt_btn = Button(self, text = "People", font="Luminari 24",width = 10, height=2, command=self.to_adopt)
         self.adopt_btn.grid(row=6,column=4)
-        self.bar.update()
 
         self.hspacing = Label(self,text="",width=100)
         self.hspacing.grid(row=7,column=5,sticky=S,rowspan=100)
