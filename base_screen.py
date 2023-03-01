@@ -258,7 +258,7 @@ class BaseScreen(Frame):
 
         self.destroy_adopt_widgets_noadopt()
         self.new_party_member()
-        self.okay1=Button(self,text=f"Okay", command=self.destroy_adopt_widgets_afteradopt,width=20,height=2,font="Luminari 30")
+        self.okay1=Button(self,text=f"Okay", command=self.destroy_adopt_widgets_afteradopt,width=15,height=1,font="Luminari 30")
         self.okay1.grid(row=1,column=0)
     
     def new_party_member(self):
