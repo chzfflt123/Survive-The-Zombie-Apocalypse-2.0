@@ -52,19 +52,25 @@ class BaseScreen(Frame):
         self.partymemberslb = Label(self,text=f"Number of Party Members: {str(self.partymembers)}", font="Ariel 18")
         self.partymemberslb.grid(row=4,column=0,sticky=W,padx=(5,10),pady=(5,0))
 
-        self.vspacing = Label(self, text=" ",height=28)
-        self.vspacing.grid(row=5,column=2)
+        self.vspacing = Label(self, text="",height=28)
+        self.vspacing.grid(row=5,column=2,sticky=E,columnspan=100)
 
-        self.stay = Button(self, text = "Stay", font="Luminari 24", width = 14, height=3, command=self.lower_supplies)
+        self.stay = Button(self, text = "Stay", font="Luminari 24", width = 10, height=2, command=self.lower_supplies)
         self.stay.grid(row=6,column=2,sticky=N)
         
         
-        self.raid = Button(self, text = "Raid", font="Luminari 24",width = 14, height=3, command=self.to_battle)
+        self.raid = Button(self, text = "Raid", font="Luminari 24",width = 10, height=2, command=self.to_battle)
         self.raid.grid(row=6,column=3)
 
-        self.adopt_btn = Button(self, text = "Adopt", font="Ariel 24",width = 14, height=3, command=self.to_adopt)
+        self.adopt_btn = Button(self, text = "Adopt", font="Luminari 24",width = 10, height=2, command=self.to_adopt)
         self.adopt_btn.grid(row=6,column=4)
         self.bar.update()
+
+        self.hspacing = Label(self,text="",width=100)
+        self.hspacing.grid(row=7,column=5,sticky=S,rowspan=100)
+
+        self.spacing=Label(self, text="",height=100)
+        self.spacing.grid(row=7,column=4,sticky=E,columnspan=100)
 
     def lower_supplies(self):
         self.supplies -= 5*self.partymembers
