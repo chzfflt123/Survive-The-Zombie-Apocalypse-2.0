@@ -253,6 +253,8 @@ class BaseScreen(Frame):
         self.adopt_btn.destroy()
         self.emptylabel.destroy()
         self.okay1.destroy()
+        self.adopt_spacing1.destroy()
+        self.adopt_spacing2.destroy()
         self.create_base_widgets()
         print("destroy_adopt_widgets_afteradopt ended")
 
