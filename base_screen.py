@@ -226,10 +226,10 @@ class BaseScreen(Frame):
         self.adopt_spacing2 = Label(self,text="",height=5)
         self.adopt_spacing2.grid(row=2,column=0,columnspan=2,sticky=E)
 
-        self.leave_btn = Button(self, text = "Leave", font = "Times 30", width = 15, command = self.destroy_adopt_widgets_noadopt_to_base)
+        self.leave_btn = Button(self, text = "Leave", font = "Luminari 30", width = 15, command = self.destroy_adopt_widgets_noadopt_to_base)
         self.leave_btn.grid(row=3,column=0)
 
-        self.adopt_btn = Button(self, text = "Adopt", font = "Times 30", width = 15, command = self.adopt)
+        self.adopt_btn = Button(self, text = "Adopt", font = "Luminari 30", width = 15, command = self.adopt)
         self.adopt_btn.grid(row=3,column=1)
 
     def destroy_adopt_widgets_noadopt(self):
@@ -252,11 +252,13 @@ class BaseScreen(Frame):
 
     def adopt(self):
         print("adopted")
-        self.emptylabel=Label(self,text="")
+
+        self.emptylabel=Label(self,text="",font="Luminari 32",width=67)
         self.emptylabel.grid(row=0,column=0)
+
         self.destroy_adopt_widgets_noadopt()
         self.new_party_member()
-        self.okay1=Button(self,text=f"Okay", command=self.destroy_adopt_widgets_afteradopt)
+        self.okay1=Button(self,text=f"Okay", command=self.destroy_adopt_widgets_afteradopt,width=20,height=2,font="Luminari 30")
         self.okay1.grid(row=1,column=0)
     
     def new_party_member(self):
