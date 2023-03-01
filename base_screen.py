@@ -26,6 +26,7 @@ class BaseScreen(Frame):
             self.health=100
             self.supplies=100
             self.partymembers=1
+            self.fight_count =0
             self.firsttime = False
         health = ttk.Style()
         health.theme_use('default')
@@ -118,7 +119,7 @@ class BaseScreen(Frame):
         # self.columnconfigure(0,weight=2)
         print(self.health)
         print(self.partymembers)
-        self.percentage = self.health*(1+(self.partymembers-1)/self.partymembers)
+        self.percentage = self.health*(1+self.partymembers/(self.partymembers+15))
         if self.percentage>100:
             self.percentage = 100
         self.fighttext = Label(self,text=f"You have a {self.percentage:.1f}% chance of winning. Do you want to fight or run?", font="Times 32")
@@ -143,9 +144,18 @@ class BaseScreen(Frame):
             self.percentage = 100
 
         if chance<=self.percentage:
-            self.survive()
+            self.fight_count +=1
+            if self.fight_count == 12:
+                self.live()
+            else:
+                self.survive()
         else:
             self.die_battle()
+    
+    def live(self):
+        self.destroy_battle_widgets()
+        self.fought.config(text = f"You fought the zombie and killed all of them. Victory. Bye.")
+
 
     
     def survive(self):
