@@ -12,19 +12,22 @@ class BaseScreen(Frame):
         self.grid()
         self.firsttime()
         self.create_base_widgets()
+        
     
     def firsttime(self):
         self.firsttime = True
 
     def create_base_widgets(self):
-        image_char = PhotoImage(file = "images/background.png")
-        char_lbl=Label(self, image = image_char)
-        char_lbl.x = image_char
-        char_lbl.place(x=0, y=0)
+        self.image_char = PhotoImage(file = "images/background_base.png")
+        self.char_lbl=Label(self, image = self.image_char)
+        self.char_lbl.x = self.image_char
+        self.char_lbl.place(x=0, y=0)
+
         if self.firsttime == True:
             self.health=100
             self.supplies=100
             self.partymembers=1
+            self.fight_count =0
             self.firsttime = False
         health = ttk.Style()
         health.theme_use('default')
@@ -50,17 +53,24 @@ class BaseScreen(Frame):
         self.partymemberslb = Label(self,text=f"Number of Party Members: {str(self.partymembers)}", font="Ariel 18")
         self.partymemberslb.grid(row=4,column=0,sticky=W,padx=(5,10),pady=(5,0))
 
-        self.vspacing = Label(self, text=" ",height=28)
-        self.vspacing.grid(row=5,column=2)
+        self.vspacing = Label(self, text="",height=28)
+        self.vspacing.grid(row=5,column=2,sticky=E,columnspan=100)
 
-        self.stay = Button(self, text = "Stay", font="Luminari 24", width = 14, height=3, command=self.lower_supplies)
+        self.stay = Button(self, text = "Stay", font="Luminari 24", width = 10, height=2, command=self.lower_supplies)
         self.stay.grid(row=6,column=2,sticky=N)
         
-        self.raid = Button(self, text = "Raid", font="Luminari 24",width = 14, height=3, command=self.to_battle)
+        
+        self.raid = Button(self, text = "Raid", font="Luminari 24",width = 10, height=2, command=self.to_battle)
         self.raid.grid(row=6,column=3)
 
-        self.adopt_btn = Button(self, text = "Adopt", font="Ariel 24",width = 14, height=3, command=self.to_adopt)
+        self.adopt_btn = Button(self, text = "Adopt", font="Luminari 24",width = 10, height=2, command=self.to_adopt)
         self.adopt_btn.grid(row=6,column=4)
+
+        self.hspacing = Label(self,text="",width=100)
+        self.hspacing.grid(row=7,column=5,sticky=S,rowspan=100)
+
+        self.spacing=Label(self, text="",height=100)
+        self.spacing.grid(row=7,column=4,sticky=E,columnspan=100)
 
     def lower_supplies(self):
         self.supplies -= 5*self.partymembers
@@ -103,7 +113,9 @@ class BaseScreen(Frame):
         self.raid.destroy()
         self.vspacing.destroy()
         self.adopt_btn.destroy()
-        self.partymemberslb.destroy()     
+        self.partymemberslb.destroy()
+        self.char_lbl.destroy()   
+  
 
     def destroy_base_widgets_for_battle(self):
         self.destroy_base_widgets()
@@ -111,36 +123,56 @@ class BaseScreen(Frame):
     
     def create_battle_widgets(self):
         # self.columnconfigure(0,weight=2)
+        self.image_char = PhotoImage(file = "images/background_battle.png")
+        self.char_lbl=Label(self, image = self.image_char)
+        self.char_lbl.x = self.image_char
+        self.char_lbl.place(x=0, y=0)
+
         print(self.health)
         print(self.partymembers)
-        self.percentage = self.health*(1+(self.partymembers-1)/self.partymembers)
+        self.percentage = self.health*(1+self.partymembers/(self.partymembers+15))
         if self.percentage>100:
             self.percentage = 100
-        self.fighttext = Label(self,text=f"You have a {self.percentage:.1f}% chance of winning. Do you want to fight or run?", font="Times 32")
+        
+        self.battle_vspacing=Label(self,text="",height=15)
+        self.battle_vspacing.grid(row=0,column=0,sticky=E,columnspan=2)
 
-        self.fighttext.grid(row=0, column=0, columnspan=2, sticky=N)
+        self.fighttext = Label(self,text=f"You have a {self.percentage:.1f}% chance of winning. Do you want to fight or run?", font="Luminari 32", width=67)
+        self.fighttext.grid(row=1, column=0, columnspan=2, sticky=N)
 
-        self.run_btn = Button(self, text = "Run", font = "Times 30", width = 15, command = self.destroy_battle_widgets_for_base)
-        self.run_btn.grid(row=1,column=0)
+        self.battle_vspacing2 = Label(self,text="",height=10)
+        self.battle_vspacing2.grid(row=2,column=0,sticky=E,columnspan=2)
 
-        self.fight_btn = Button(self, text = "Fight", font = "Times 30", width = 15, command = self.fight)
-        self.fight_btn.grid(row=1,column=1)
+        self.run_btn = Button(self, text = "Run", font = "Luminari 30", width = 15, command = self.destroy_battle_widgets_for_base)
+        self.run_btn.grid(row=2,column=0,sticky=E)
+
+        self.fight_btn = Button(self, text = "Fight", font = "Luminari 30", width = 15, command = self.fight)
+        self.fight_btn.grid(row=2,column=1,sticky=W)
     
     def fight(self):
         print("fight started")
         chance=random.randint(0,100)
 
         self.fought=Label(self,text="")
-        self.fought.grid(row=0,column=0)
+        self.fought.grid(row=1,column=0)
 
         self.percentage = self.health*(1+(self.partymembers-1)/self.partymembers)
         if self.percentage>100:
             self.percentage = 100
 
         if chance<=self.percentage:
-            self.survive()
+            self.fight_count +=1
+            if self.fight_count == 12:
+                self.live()
+            else:
+                self.survive()
         else:
             self.die_battle()
+    
+    def live(self):
+        self.destroy_battle_widgets()
+        self.fought.config(text = f"You fought the zombie and killed all of them. Victory. Bye.")
+
 
     
     def survive(self):
@@ -152,10 +184,13 @@ class BaseScreen(Frame):
         if self.supplies >= 100:
             self.supplies=100
         
-        self.fought.config(text = f"You fought the zombie and lost {str(healthlost)} health.\n Your health is now at {str(self.health)}.\nYou received {amount} supplies. Your supplies is now at {str(self.supplies)}")
+        self.okay_vspacing=Label(self,text="",height=8)
+        self.okay_vspacing.grid(row=0,column=0,sticky=E)
 
-        self.okay=Button(self,text=f"Okay", command=self.destroy_okay)
-        self.okay.grid(row=1,column=0)
+        self.fought.config(text = f"You fought the zombie and lost {str(healthlost)} health.\n Your health is now at {str(self.health)}.\n\nYou received {amount} supplies.\nYour supplies is now at {str(self.supplies)}",font="Luminari 30",width=70)
+
+        self.okay=Button(self,text="Okay", font="Luminari 30", command=self.destroy_okay,width=20,height=2)
+        self.okay.grid(row=2,column=0)
     
     def die_base(self):
         self.destroy_base_widgets()
