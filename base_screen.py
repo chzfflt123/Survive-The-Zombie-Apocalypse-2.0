@@ -61,7 +61,6 @@ class BaseScreen(Frame):
 
         self.adopt_btn = Button(self, text = "Adopt", font="Ariel 24",width = 14, height=3, command=self.to_adopt)
         self.adopt_btn.grid(row=6,column=4)
-        self.bar.update()
 
     def lower_supplies(self):
         self.supplies -= 5*self.partymembers
