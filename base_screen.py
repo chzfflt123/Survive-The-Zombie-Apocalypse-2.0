@@ -259,10 +259,11 @@ class BaseScreen(Frame):
         if chance<=self.percentage:
             print("you killed a party member")
             self.partymembers -= 1
+            self.kill_to_base()
         else:
             self.die_kill()
         
-        self.kill_to_base()
+        
 
     def destroy_kill_widgets(self):
         self.kill_yes.destroy()
