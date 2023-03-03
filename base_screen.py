@@ -174,10 +174,14 @@ class BaseScreen(Frame):
             self.die_battle()
     
     def live(self):
+
+        self.image_char = PhotoImage(file = "images/background_live.png")
+        self.char_lbl=Label(self, image = self.image_char)
+        self.char_lbl.x = self.image_char
+        self.char_lbl.place(x=0, y=0)
+
         self.destroy_battle_widgets()
         self.fought.config(text = f"You fought the zombie and killed all of them. Victory. Bye.")
-
-
     
     def survive(self):
         self.destroy_battle_widgets()
@@ -243,6 +247,8 @@ class BaseScreen(Frame):
         self.partytext.destroy()
         self.leave_btn.destroy()
         self.adopt_btn.destroy()
+        self.adopt_spacing1.destroy()
+        self.adopt_spacing2.destroy()
     def destroy_adopt_widgets_noadopt_to_base(self):
         self.destroy_adopt_widgets_noadopt()
         self.create_base_widgets()
@@ -255,19 +261,27 @@ class BaseScreen(Frame):
         self.okay1.destroy()
         self.adopt_spacing1.destroy()
         self.adopt_spacing2.destroy()
+        self.adopt_spacing3.destroy()
+        self.adopt_spacing4.destroy()
         self.create_base_widgets()
         print("destroy_adopt_widgets_afteradopt ended")
 
     def adopt(self):
         print("adopted")
 
+        self.adopt_spacing3=Label(self,text="",height=15)
+        self.adopt_spacing3.grid(row=0,column=0,sticky=E)
+
         self.emptylabel=Label(self,text="",font="Luminari 32",width=67)
-        self.emptylabel.grid(row=0,column=0)
+        self.emptylabel.grid(row=1,column=0)
+
+        self.adopt_spacing4=Label(self,text="",height=5)
+        self.adopt_spacing4.grid(row=2,column=0,sticky=E)
 
         self.destroy_adopt_widgets_noadopt()
         self.new_party_member()
-        self.okay1=Button(self,text=f"Okay", command=self.destroy_adopt_widgets_afteradopt,width=20,height=2,font="Luminari 30")
-        self.okay1.grid(row=1,column=0)
+        self.okay1=Button(self,text=f"Okay", command=self.destroy_adopt_widgets_afteradopt,width=15,height=1,font="Luminari 30")
+        self.okay1.grid(row=3,column=0)
     
     def new_party_member(self):
         self.partymembers +=1
