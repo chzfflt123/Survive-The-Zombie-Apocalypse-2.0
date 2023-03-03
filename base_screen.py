@@ -184,13 +184,19 @@ class BaseScreen(Frame):
     def kill(self):
         self.destroy_base_widgets()
 
+        self.percentage = (self.health*((self.partymembers-1)/self.partymembers) + 100) /2
+        if self.percentage>100:
+            self.percentage = 100
+
         if self.partymembers > 1:
-            self.kill_text = "Would you like to kill a party member?"
+            self.kill_text = f"You have a {self.percentage:.1f}% chance of survival. Would you like to kill a party member?"
         else:
             self.kill_text = "You have no party members to kill"
-
+        
         self.kill_text_lb = Label(self, text=self.kill_text)
         self.kill_text_lb.grid(row=0, column=0)
+
+        
 
         self.kill_yes = Button(self, text="Yes", width=10, height=2, command=self.member_killed)
         self.kill_no = Button(self, text="No", width=10, height=2, command=self.kill_to_base)
@@ -204,7 +210,18 @@ class BaseScreen(Frame):
             self.kill_back.grid(row=1, column=0)
 
     def member_killed(self):
-        self.partymembers -= 1
+        chance=random.randint(0,100)
+
+        self.percentage = (self.health*((self.partymembers-1)/self.partymembers) + 100)/2
+        if self.percentage>100:
+            self.percentage = 100
+
+        if chance<=self.percentage:
+            print("you killed a party member")
+            self.partymembers -= 1
+        else:
+            self.die_kill()
+        
         self.kill_to_base()
 
     def destroy_kill_widgets(self):
@@ -212,6 +229,13 @@ class BaseScreen(Frame):
         self.kill_no.destroy()
         self.kill_back.destroy()
         self.kill_text_lb.destroy()
+    
+    def die_kill(self):
+        self.destroy_kill_widgets()
+        self.image_char = PhotoImage(file = "images/deadlol.png")
+        self.char_lbl=Label(self, image = self.image_char)
+        self.char_lbl.x = self.image_char
+        self.char_lbl.place(x=0, y=0)
     
     def kill_to_base(self):
         self.create_base_widgets()
