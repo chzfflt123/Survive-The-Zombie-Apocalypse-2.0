@@ -98,6 +98,7 @@ class BaseScreen(Frame):
         self.fight_btn.destroy()
         self.battle_vspacing.destroy()
         self.battle_vspacing2.destroy()
+        self.char_lbl2.destroy()
     
     def destroy_okay(self):
         self.okay.destroy()
@@ -127,10 +128,10 @@ class BaseScreen(Frame):
     
     def create_battle_widgets(self):
         # self.columnconfigure(0,weight=2)
-        self.image_char = PhotoImage(file = "images/background_battle.png")
-        self.char_lbl=Label(self, image = self.image_char)
-        self.char_lbl.x = self.image_char
-        self.char_lbl.place(x=0, y=0)
+        self.image_char2 = PhotoImage(file = "images/background_battle.png")
+        self.char_lbl2=Label(self, image = self.image_char2)
+        self.char_lbl2.x = self.image_char2
+        self.char_lbl2.place(x=0, y=0)
 
         print(self.health)
         print(self.partymembers)
@@ -205,13 +206,17 @@ class BaseScreen(Frame):
     
     def die_base(self):
         self.destroy_base_widgets()
-        self.died_base=Label(self,text="you died from low supplies lol")
-        self.died_base.grid(row=0,column=0)
+        self.image_char = PhotoImage(file = "images/deadlol.png")
+        self.char_lbl=Label(self, image = self.image_char)
+        self.char_lbl.x = self.image_char
+        self.char_lbl.place(x=0, y=0)
 
     def die_battle(self):
         self.destroy_battle_widgets()
-        self.died_battle=Label(self,text = "you died in battle lol")
-        self.died_battle.grid(row=0,column=0)
+        self.image_char = PhotoImage(file = "images/deadlol.png")
+        self.char_lbl=Label(self, image = self.image_char)
+        self.char_lbl.x = self.image_char
+        self.char_lbl.place(x=0, y=0)
 
     def to_adopt(self):
         self.destroy_base_widgets_for_adopt()
