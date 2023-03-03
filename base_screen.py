@@ -69,7 +69,7 @@ class BaseScreen(Frame):
 
         self.bar = Progressbar(self, length=360, style='health.Horizontal.TProgressbar')
         self.bar['value'] = self.health
-        self.bar.grid(column=0, row=0, padx = 10, pady=(10, 0), sticky=S)
+        self.bar.grid(column=0, row=0, padx = 10, pady=(10, 0), sticky=W)
         self.healthlb = Label(self, text="Health: " + str(self.health), font="Ariel 10")
         self.healthlb.grid(row=1, column=0, padx=6.5, sticky=W)
         
@@ -86,21 +86,27 @@ class BaseScreen(Frame):
         self.vspacing = Label(self, text="",height=28)
         self.vspacing.grid(row=5,column=2,sticky=E,columnspan=100)
 
+        self.wspacing = Label(self, text="", width=50)
+        self.wspacing.grid(row=10, column=0)
+
         self.stay = Button(self, text = "Stay", font="Luminari 24", width = 10, height=2, command=self.lower_supplies)
-        self.stay.grid(row=6,column=2,sticky=N)
+        self.stay.grid(row=6,column=0,sticky=E)
         
         
         self.raid = Button(self, text = "Raid", font="Luminari 24",width = 10, height=2, command=self.to_battle)
-        self.raid.grid(row=6,column=3)
+        self.raid.grid(row=6,column=1)
 
         self.adopt_btn = Button(self, text = "People", font="Luminari 24",width = 10, height=2, command=self.to_adopt)
-        self.adopt_btn.grid(row=6,column=4)
+        self.adopt_btn.grid(row=6,column=2)
+
+        self.kill_btn = Button(self, text="Kill", font="Luminari 24", width=10, height=2, command=self.kill)
+        self.kill_btn.grid(row=6, column=3)
 
         self.hspacing = Label(self,text="",width=100)
-        self.hspacing.grid(row=7,column=5,sticky=S,rowspan=100)
+        self.hspacing.grid(row=7,column=6,sticky=S,rowspan=100)
 
         self.spacing=Label(self, text="",height=100)
-        self.spacing.grid(row=7,column=4,sticky=E,columnspan=100)
+        self.spacing.grid(row=7,column=5,sticky=E,columnspan=100)
 
     def lower_supplies(self):
         self.supplies -= 5*self.partymembers
@@ -159,6 +165,8 @@ class BaseScreen(Frame):
         self.adopt_btn.destroy()
         self.partymemberslb.destroy()
         self.char_lbl.destroy()
+        self.kill_btn.destroy()
+        self.wspacing.destroy()
   
 
     def destroy_base_widgets_for_battle(self):
@@ -167,10 +175,10 @@ class BaseScreen(Frame):
     
     def create_battle_widgets(self):
         # self.columnconfigure(0,weight=2)
-        self.image_char = PhotoImage(file = "images/background_battle.png")
-        self.char_lbl=Label(self, image = self.image_char)
-        self.char_lbl.x = self.image_char
-        self.char_lbl.place(x=0, y=0)
+        self.image_char2 = PhotoImage(file = "images/background_battle.png")
+        self.char_lbl2=Label(self, image = self.image_char2)
+        self.char_lbl2.x = self.image_char2
+        self.char_lbl2.place(x=0, y=0)
 
         print(self.health)
         print(self.partymembers)
@@ -213,6 +221,42 @@ class BaseScreen(Frame):
         else:
             self.die_battle()
     
+    def kill(self):
+        self.destroy_base_widgets()
+
+        if self.partymembers > 1:
+            self.kill_text = "Would you like to kill a party member?"
+        else:
+            self.kill_text = "You have no party members to kill"
+
+        self.kill_text_lb = Label(self, text=self.kill_text)
+        self.kill_text_lb.grid(row=0, column=0)
+
+        self.kill_yes = Button(self, text="Yes", width=10, height=2, command=self.member_killed)
+        self.kill_no = Button(self, text="No", width=10, height=2, command=self.kill_to_base)
+
+        self.kill_back = Button(self, text="Back to Base", width=12, height=2, command=self.kill_to_base)
+
+        if self.partymembers > 1:
+            self.kill_yes.grid(row=1, column=0)
+            self.kill_no.grid(row=1, column=1)
+        else:
+            self.kill_back.grid(row=1, column=0)
+
+    def member_killed(self):
+        self.partymembers -= 1
+        self.kill_to_base()
+
+    def destroy_kill_widgets(self):
+        self.kill_yes.destroy()
+        self.kill_no.destroy()
+        self.kill_back.destroy()
+        self.kill_text_lb.destroy()
+    
+    def kill_to_base(self):
+        self.create_base_widgets()
+        self.destroy_kill_widgets()
+    
     def live(self):
 
         self.image_char = PhotoImage(file = "images/background_live.png")
@@ -245,13 +289,17 @@ class BaseScreen(Frame):
     
     def die_base(self):
         self.destroy_base_widgets()
-        self.died_base=Label(self,text="you died from low supplies lol")
-        self.died_base.grid(row=0,column=0)
+        self.image_char = PhotoImage(file = "images/deadlol.png")
+        self.char_lbl=Label(self, image = self.image_char)
+        self.char_lbl.x = self.image_char
+        self.char_lbl.place(x=0, y=0)
 
     def die_battle(self):
         self.destroy_battle_widgets()
-        self.died_battle=Label(self,text = "you died in battle lol")
-        self.died_battle.grid(row=0,column=0)
+        self.image_char = PhotoImage(file = "images/deadlol.png")
+        self.char_lbl=Label(self, image = self.image_char)
+        self.char_lbl.x = self.image_char
+        self.char_lbl.place(x=0, y=0)
 
     def to_adopt(self):
         self.destroy_base_widgets_for_adopt()
