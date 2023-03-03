@@ -18,17 +18,47 @@ class BaseScreen(Frame):
         self.firsttime = True
 
     def create_base_widgets(self):
-        self.image_char = PhotoImage(file = "images/background_base.png")
-        self.char_lbl=Label(self, image = self.image_char)
-        self.char_lbl.x = self.image_char
-        self.char_lbl.place(x=0, y=0)
-
         if self.firsttime == True:
             self.health=100
             self.supplies=100
             self.partymembers=1
             self.fight_count =0
             self.firsttime = False
+        
+        self.image_char = PhotoImage(file = "images/background_base.png")
+        self.char_lbl=Label(self, image = self.image_char)
+        self.char_lbl.x = self.image_char
+        self.char_lbl.place(x=0, y=0)
+
+        self.angryman = PhotoImage(file = "images/character_angryman.png")
+        self.angryman_lbl=Label(self, image = self.angryman)
+        self.angryman_lbl.x = self.angryman
+        self.angryman_lbl.place(x=550, y=150)
+        
+        if self.partymembers>=2:
+            self.baldie = PhotoImage(file = "images/character_baldie.png")
+            self.baldie_lbl=Label(self, image = self.baldie)
+            self.baldie_lbl.x = self.baldie
+            self.baldie_lbl.place(x=220, y=175)
+        
+        if self.partymembers>=3:
+            self.girl = PhotoImage(file = "images/character_girl.png")
+            self.girl_lbl=Label(self, image = self.girl)
+            self.girl_lbl.x = self.girl
+            self.girl_lbl.place(x=775, y=115)
+
+        if self.partymembers>=4:
+            self.duck = PhotoImage(file = "images/character_duck.png")
+            self.duck_lbl=Label(self, image = self.duck)
+            self.duck_lbl.x = self.duck
+            self.duck_lbl.place(x=425, y=100)
+
+        if self.partymembers>=5:
+            self.dog = PhotoImage(file = "images/character_dog.png")
+            self.dog_lbl=Label(self, image = self.dog)
+            self.dog_lbl.x = self.dog
+            self.dog_lbl.place(x=710, y=450)
+
         health = ttk.Style()
         health.theme_use('default')
         health.configure("health.Horizontal.TProgressbar", background='#00FF2B')
@@ -109,6 +139,16 @@ class BaseScreen(Frame):
     # BATTLE SCREEN PAGE
 
     def destroy_base_widgets(self):
+        if self.partymembers>=1:
+            self.angryman_lbl.destroy()
+        if self.partymembers>=2:
+            self.baldie_lbl.destroy()
+        if self.partymembers>=3:
+            self.girl_lbl.destroy()
+        if self.partymembers>=4:
+            self.duck_lbl.destroy()
+        if self.partymembers>=5:
+            self.dog_lbl.destroy()
         self.bar.destroy()
         self.bar2.destroy()
         self.healthlb.destroy()
