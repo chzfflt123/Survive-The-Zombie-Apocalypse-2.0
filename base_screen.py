@@ -98,7 +98,6 @@ class BaseScreen(Frame):
         self.fight_btn.destroy()
         self.battle_vspacing.destroy()
         self.battle_vspacing2.destroy()
-        self.char_lbl2.destroy()
     
     def destroy_okay(self):
         self.okay.destroy()
