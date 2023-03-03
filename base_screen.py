@@ -491,6 +491,8 @@ class BaseScreen(Frame):
         self.NZ_btn.grid(row=2,column=1,sticky=W)
 
     def luckred(self):
+        self.destroy_create_luck_widgets()
+        
         self.okay_vspacing=Label(self,text="",height=13)
         self.okay_vspacing.grid(row=0,column=0,sticky=E)
 
@@ -504,6 +506,8 @@ class BaseScreen(Frame):
         self.okay.grid(row=3,column=0)     
 
     def luckblue(self):
+        self.destroy_create_luck_widgets()
+
         self.okay_vspacing=Label(self,text="",height=13)
         self.okay_vspacing.grid(row=0,column=0,sticky=E)
 
@@ -536,6 +540,8 @@ class BaseScreen(Frame):
         self.NZ_btn.grid(row=2,column=1,sticky=W)
 
     def luckschool(self):
+        self.destroy_create_luck_widgets()
+
         self.okay_vspacing=Label(self,text="",height=13)
         self.okay_vspacing.grid(row=0,column=0,sticky=E)
 
@@ -550,6 +556,8 @@ class BaseScreen(Frame):
         self.okay.grid(row=3,column=0)     
 
     def luckfood(self):
+        self.destroy_create_luck_widgets()
+
         self.okay_vspacing=Label(self,text="",height=13)
         self.okay_vspacing.grid(row=0,column=0,sticky=E)
 
@@ -601,6 +609,8 @@ class BaseScreen(Frame):
         self.NZ_btn.grid(row=2,column=1,sticky=W)
 
     def luck16(self):
+        self.destroy_create_luck_widgets()
+
         self.okay_vspacing=Label(self,text="",height=13)
         self.okay_vspacing.grid(row=0,column=0,sticky=E)
 
@@ -618,6 +628,8 @@ class BaseScreen(Frame):
         self.okay.grid(row=3,column=0)     
 
     def luck719(self):
+        self.destroy_create_luck_widgets()
+
         self.okay_vspacing=Label(self,text="",height=13)
         self.okay_vspacing.grid(row=0,column=0,sticky=E)
 
@@ -654,6 +666,7 @@ class BaseScreen(Frame):
         self.NZ_btn.grid(row=2,column=1,sticky=W)
 
     def lucky(self):
+        self.destroy_create_luck_widgets()
         self.okay_vspacing=Label(self,text="",height=13)
         self.okay_vspacing.grid(row=0,column=0,sticky=E)
 
@@ -666,6 +679,8 @@ class BaseScreen(Frame):
         self.okay.grid(row=3,column=0)     
 
     def luckn(self):
+        self.destroy_create_luck_widgets()
+        
         self.okay_vspacing=Label(self,text="",height=13)
         self.okay_vspacing.grid(row=0,column=0,sticky=E)
 
