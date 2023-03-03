@@ -1,4 +1,5 @@
 from tkinter import *
+import time
 
 from start_page import StartPage
 from how_to_play import How_To_Play

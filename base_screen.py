@@ -37,14 +37,14 @@ class BaseScreen(Frame):
         supplies.theme_use('default')
         supplies.configure("supplies.Horizontal.TProgressbar", background='blue')
 
-        self.bar = Progressbar(self, length=320, style='health.Horizontal.TProgressbar')
+        self.bar = Progressbar(self, length=360, style='health.Horizontal.TProgressbar')
         self.bar['value'] = self.health
         self.bar.grid(column=0, row=0, padx = 10, pady=(10, 0), sticky=S)
         self.healthlb = Label(self, text="Health: " + str(self.health), font="Ariel 10")
         self.healthlb.grid(row=1, column=0, padx=6.5, sticky=W)
         
 
-        self.bar2 = Progressbar(self, length=320, style='supplies.Horizontal.TProgressbar', mode="determinate")
+        self.bar2 = Progressbar(self, length=360, style='supplies.Horizontal.TProgressbar', mode="determinate")
         self.bar2['value'] = self.supplies
         self.bar2.grid(column=0, row=2, padx = 10, sticky=W)
         self.supplieslb = Label(self, text="Supplies: "+str(self.supplies), font="Ariel 10")
@@ -63,7 +63,7 @@ class BaseScreen(Frame):
         self.raid = Button(self, text = "Raid", font="Luminari 24",width = 10, height=2, command=self.to_battle)
         self.raid.grid(row=6,column=3)
 
-        self.adopt_btn = Button(self, text = "Adopt", font="Luminari 24",width = 10, height=2, command=self.to_adopt)
+        self.adopt_btn = Button(self, text = "People", font="Luminari 24",width = 10, height=2, command=self.to_adopt)
         self.adopt_btn.grid(row=6,column=4)
 
         self.hspacing = Label(self,text="",width=100)
@@ -96,10 +96,14 @@ class BaseScreen(Frame):
         self.fighttext.destroy()
         self.run_btn.destroy()
         self.fight_btn.destroy()
+        self.battle_vspacing.destroy()
+        self.battle_vspacing2.destroy()
     
     def destroy_okay(self):
         self.okay.destroy()
         self.fought.destroy()
+        self.okay_vspacing.destroy()
+        self.okay_spacing2.destroy()
         self.create_base_widgets()
     
     # BATTLE SCREEN PAGE
@@ -114,7 +118,7 @@ class BaseScreen(Frame):
         self.vspacing.destroy()
         self.adopt_btn.destroy()
         self.partymemberslb.destroy()
-        self.char_lbl.destroy()   
+        self.char_lbl.destroy()
   
 
     def destroy_base_widgets_for_battle(self):
@@ -170,10 +174,14 @@ class BaseScreen(Frame):
             self.die_battle()
     
     def live(self):
+
+        self.image_char = PhotoImage(file = "images/background_live.png")
+        self.char_lbl=Label(self, image = self.image_char)
+        self.char_lbl.x = self.image_char
+        self.char_lbl.place(x=0, y=0)
+
         self.destroy_battle_widgets()
         self.fought.config(text = f"You fought the zombie and killed all of them. Victory. Bye.")
-
-
     
     def survive(self):
         self.destroy_battle_widgets()
@@ -184,13 +192,16 @@ class BaseScreen(Frame):
         if self.supplies >= 100:
             self.supplies=100
         
-        self.okay_vspacing=Label(self,text="",height=8)
+        self.okay_vspacing=Label(self,text="",height=13)
         self.okay_vspacing.grid(row=0,column=0,sticky=E)
 
         self.fought.config(text = f"You fought the zombie and lost {str(healthlost)} health.\n Your health is now at {str(self.health)}.\n\nYou received {amount} supplies.\nYour supplies is now at {str(self.supplies)}",font="Luminari 30",width=70)
 
+        self.okay_spacing2=Label(self, text="", height=2)
+        self.okay_spacing2.grid(row=2, column=0, sticky=E)
+
         self.okay=Button(self,text="Okay", font="Luminari 30", command=self.destroy_okay,width=20,height=2)
-        self.okay.grid(row=2,column=0)
+        self.okay.grid(row=3,column=0)
     
     def die_base(self):
         self.destroy_base_widgets()
@@ -211,20 +222,33 @@ class BaseScreen(Frame):
     
     def create_adopt_widgets(self):
         # self.columnconfigure(0,weight=2)
-        self.partytext = Label(self,text=f"Do you want to adopt or leave? You currently have {self.partymembers} member(s) in your party.", font="Times 24")
 
-        self.partytext.grid(row=0, column=0, columnspan=2, sticky=N)
+        self.image_char = PhotoImage(file = "images/background_people.png")
+        self.char_lbl=Label(self, image = self.image_char)
+        self.char_lbl.x = self.image_char
+        self.char_lbl.place(x=0, y=0)
 
-        self.leave_btn = Button(self, text = "Leave", font = "Times 30", width = 15, command = self.destroy_adopt_widgets_noadopt_to_base)
-        self.leave_btn.grid(row=1,column=0)
+        self.adopt_spacing1 = Label(self,text="",height=15)
+        self.adopt_spacing1.grid(row=0,column=0,columnspan=2,sticky=E)
 
-        self.adopt_btn = Button(self, text = "Adopt", font = "Times 30", width = 15, command = self.adopt)
-        self.adopt_btn.grid(row=1,column=1)
+        self.partytext = Label(self,text=f"Do you want to adopt or leave? You currently have {self.partymembers} member(s) in your party.", font="Luminari 32",width=66)
+        self.partytext.grid(row=1, column=0, columnspan=2, sticky=N)
+
+        self.adopt_spacing2 = Label(self,text="",height=5)
+        self.adopt_spacing2.grid(row=2,column=0,columnspan=2,sticky=E)
+
+        self.leave_btn = Button(self, text = "Leave", font = "Luminari 30", width = 15, command = self.destroy_adopt_widgets_noadopt_to_base)
+        self.leave_btn.grid(row=3,column=0)
+
+        self.adopt_btn = Button(self, text = "Adopt", font = "Luminari 30", width = 15, command = self.adopt)
+        self.adopt_btn.grid(row=3,column=1)
 
     def destroy_adopt_widgets_noadopt(self):
         self.partytext.destroy()
         self.leave_btn.destroy()
         self.adopt_btn.destroy()
+        self.adopt_spacing1.destroy()
+        self.adopt_spacing2.destroy()
     def destroy_adopt_widgets_noadopt_to_base(self):
         self.destroy_adopt_widgets_noadopt()
         self.create_base_widgets()
@@ -235,18 +259,29 @@ class BaseScreen(Frame):
         self.adopt_btn.destroy()
         self.emptylabel.destroy()
         self.okay1.destroy()
+        self.adopt_spacing1.destroy()
+        self.adopt_spacing2.destroy()
+        self.adopt_spacing3.destroy()
+        self.adopt_spacing4.destroy()
         self.create_base_widgets()
-        print
-        ("destroy_adopt_widgets_afteradopt ended")
+        print("destroy_adopt_widgets_afteradopt ended")
 
     def adopt(self):
         print("adopted")
-        self.emptylabel=Label(self,text="")
-        self.emptylabel.grid(row=0,column=0)
+
+        self.adopt_spacing3=Label(self,text="",height=15)
+        self.adopt_spacing3.grid(row=0,column=0,sticky=E)
+
+        self.emptylabel=Label(self,text="",font="Luminari 32",width=67)
+        self.emptylabel.grid(row=1,column=0)
+
+        self.adopt_spacing4=Label(self,text="",height=5)
+        self.adopt_spacing4.grid(row=2,column=0,sticky=E)
+
         self.destroy_adopt_widgets_noadopt()
         self.new_party_member()
-        self.okay1=Button(self,text=f"Okay", command=self.destroy_adopt_widgets_afteradopt)
-        self.okay1.grid(row=1,column=0)
+        self.okay1=Button(self,text=f"Okay", command=self.destroy_adopt_widgets_afteradopt,width=15,height=1,font="Luminari 30")
+        self.okay1.grid(row=3,column=0)
     
     def new_party_member(self):
         self.partymembers +=1
