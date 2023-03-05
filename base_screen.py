@@ -93,7 +93,7 @@ class BaseScreen(Frame):
         self.stay.grid(row=6,column=0,sticky=E)
         
         
-        self.raid = Button(self, text = "Raid", font="Luminari 24",width = 10, height=2, command=self.to_battle)
+        self.raid = Button(self, text = "Fight", font="Luminari 24",width = 10, height=2, command=self.to_battle)
         self.raid.grid(row=6,column=1)
 
         self.adopt_btn = Button(self, text = "People", font="Luminari 24",width = 10, height=2, command=self.to_adopt)
