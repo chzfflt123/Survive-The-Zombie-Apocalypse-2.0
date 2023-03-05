@@ -91,15 +91,14 @@ class BaseScreen(Frame):
         self.stay = Button(self, text = "Stay", font="Luminari 24", width = 7, height=2, command=self.lower_supplies)
         self.stay.grid(row=6,column=0,sticky=E)
         
-        
         self.raid = Button(self, text = "Fight", font="Luminari 24",width = 7, height=2, command=self.to_battle)
-        self.raid.grid(row=6,column=1)
+        self.raid.grid(row=6,column=1, sticky=W)
 
         self.adopt_btn = Button(self, text = "People", font="Luminari 24",width = 7, height=2, command=self.to_adopt)
-        self.adopt_btn.grid(row=6,column=2)
+        self.adopt_btn.grid(row=6,column=2, sticky=W)
 
         self.kill_btn = Button(self, text="Kill", font="Luminari 24", width=7, height=2, command=self.kill)
-        self.kill_btn.grid(row=6, column=3)
+        self.kill_btn.grid(row=6, column=3, sticky=W)
 
         self.lucky_btn = Button(self, text = "Lucky???", font="Luminari 24", width = 7, height = 2, command=self.destroy_base_widgets_for_luck)
         self.lucky_btn.grid(row=6, column=4)
@@ -510,7 +509,7 @@ class BaseScreen(Frame):
         self.okay_vspacing=Label(self,text="",height=13)
         self.okay_vspacing.grid(row=0,column=0,sticky=E,columnspan=2)
 
-        self.supplies = 95
+        self.health = 95
         self.luckytext.config(text = f"You made your choices.\n Your health is now at 95.\n\nYou, are very lucky.\nGood luck with survival...sigh",font="Luminari 30",width=70)
 
         self.okay_spacing2=Label(self, text="", height=5)
@@ -669,6 +668,7 @@ class BaseScreen(Frame):
         self.okay_vspacing=Label(self,text="",height=13)
         self.okay_vspacing.grid(row=0,column=0,sticky=E,columnspan=2)
 
+        self.health = 75
         self.luckytext.config(text = f"Wow...\n You cheated, didn't you\n Your health is now at 75.\n\nJust know I'm not encouraging cheating.\nThere just is that tiny possibility you actually knew...(wink)",font="Luminari 30",width=70)
 
         self.okay_spacing2=Label(self, text="", height=2)
