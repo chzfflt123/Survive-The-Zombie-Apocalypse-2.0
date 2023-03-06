@@ -400,9 +400,15 @@ class BaseScreen(Frame):
         self.adopt_spacing4.grid(row=2,column=0,sticky=E)
 
         self.destroy_adopt_widgets_noadopt()
-        self.new_party_member()
+        if self.partymembers < 5:
+            self.new_party_member()
+        elif self.partymembers >= 5:
+            self.noadopt()
         self.okay1=Button(self,text=f"Okay", command=self.destroy_adopt_widgets_afteradopt,width=15,height=1,font="Luminari 30")
         self.okay1.grid(row=3,column=0)
+    
+    def noadopt(self):
+        self.emptylabel.config(text = f"You have reached the limit of members in your party")
     
     def new_party_member(self):
         self.partymembers +=1
@@ -698,7 +704,7 @@ class BaseScreen(Frame):
         self.supplies = 100
         self.luckytext = Label(self, text=f"You didn't know...\nWell, cows can grow up to 6ft 4in.\nBut since you were sincere,\n\nYour health is at {str(self.health)}.\nYour supply is at {str(self.supplies)}.",font="Luminari 30",width=70)
         self.luckytext.grid(row=1, column=0, columnspan=2, sticky=N)
-        
+
         self.endluck_spacing2=Label(self, text="", height=2)
         self.endluck_spacing2.grid(row=2, column=0, sticky=E,columnspan=2)
 
