@@ -32,7 +32,7 @@ class BackgroundInfo(Frame):
         text1.grid(row=4, column=0, columnspan=4, pady=(0, padding))
         text2 = Label(self, text="happened. Just that one day, half the population vanished, and the animals turned", font="Luminari 24")
         text2.grid(row=5, column=0, columnspan=4, pady=(0, padding))
-        text3 = Label(self, text="feral. Their eyes turned horrifying red, and their mouths drizzled with their", font="Ariel 24")
+        text3 = Label(self, text="feral. Their eyes turned horrifying red, and their mouths drizzled with their", font="Luminari 24")
         text3.grid(row=6, column=0, columnspan=4, pady=(0, padding))
         text4 = Label(self, text="saliva, their wanting for blood. Even the pets kept in individuals\' households", font="Luminari 24")
         text4.grid(row=7, column=0, columnspan=4, pady=(0, padding))
