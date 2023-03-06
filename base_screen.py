@@ -83,7 +83,7 @@ class BaseScreen(Frame):
         self.partymemberslb.grid(row=4,column=0,sticky=W,padx=(5,10),pady=(5,0))
 
         self.vspacing = Label(self, text="",height=28)
-        self.vspacing.grid(row=5,column=2,sticky=E,columnspan=2)
+        self.vspacing.grid(row=5,column=100,sticky=E,columnspan=2)
 
         self.wspacing = Label(self, text="", width=50)
         self.wspacing.grid(row=10, column=0)
