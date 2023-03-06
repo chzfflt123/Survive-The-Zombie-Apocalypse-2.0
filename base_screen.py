@@ -341,6 +341,8 @@ class BaseScreen(Frame):
         self.char_lbl=Label(self, image = self.image_char)
         self.char_lbl.x = self.image_char
         self.char_lbl.place(x=0, y=0)
+        self.rlabel = Label(self, text="", width=25, height=100, bg="#7E6E6F")
+        self.rlabel.grid(row=0, column=8, pady=20)
 
     def to_adopt(self):
         self.destroy_base_widgets_for_adopt()
