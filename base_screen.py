@@ -83,23 +83,22 @@ class BaseScreen(Frame):
         self.partymemberslb.grid(row=4,column=0,sticky=W,padx=(5,10),pady=(5,0))
 
         self.vspacing = Label(self, text="",height=28)
-        self.vspacing.grid(row=5,column=2,sticky=E,columnspan=100)
+        self.vspacing.grid(row=5,column=2,sticky=E,columnspan=2)
 
         self.wspacing = Label(self, text="", width=50)
         self.wspacing.grid(row=10, column=0)
 
         self.stay = Button(self, text = "Stay", font="Luminari 24", width = 7, height=2, command=self.lower_supplies)
         self.stay.grid(row=6,column=0,sticky=E)
-        
-        
+
         self.raid = Button(self, text = "Fight", font="Luminari 24",width = 7, height=2, command=self.to_battle)
-        self.raid.grid(row=6,column=1)
+        self.raid.grid(row=6,column=1, sticky=W)
 
         self.adopt_btn = Button(self, text = "People", font="Luminari 24",width = 7, height=2, command=self.to_adopt)
-        self.adopt_btn.grid(row=6,column=2)
+        self.adopt_btn.grid(row=6,column=2, sticky=W)
 
         self.kill_btn = Button(self, text="Kill", font="Luminari 24", width=7, height=2, command=self.kill)
-        self.kill_btn.grid(row=6, column=3)
+        self.kill_btn.grid(row=6, column=3, sticky=W)
 
         self.lucky_btn = Button(self, text = "Lucky???", font="Luminari 24", width = 7, height = 2, command=self.destroy_base_widgets_for_luck)
         self.lucky_btn.grid(row=6, column=4)
@@ -137,21 +136,6 @@ class BaseScreen(Frame):
         self.battle_vspacing.destroy()
         self.battle_vspacing2.destroy()
     
-    def destroy_okay(self):
-        self.okay.destroy()
-        self.fought.destroy()
-        self.okay_vspacing.destroy()
-        self.okay_spacing2.destroy()
-        self.create_base_widgets()
-    
-    def destroy_okay_lucky(self):
-        self.okay.destroy()
-        self.luckytext.destroy()
-        self.okay_vspacing.destroy()
-        self.okay_spacing2.destroy()
-        self.create_base_widgets()
-    
-    
     # BATTLE SCREEN PAGE
 
     def destroy_base_widgets(self):
@@ -178,6 +162,12 @@ class BaseScreen(Frame):
         self.kill_btn.destroy()
         self.wspacing.destroy()
   
+    def destroy_okay(self):
+        self.okay.destroy()
+        self.fought.destroy()
+        self.okay_vspacing.destroy()
+        self.okay_spacing2.destroy()
+        self.create_base_widgets()
 
     def destroy_base_widgets_for_battle(self):
         self.destroy_base_widgets()
@@ -417,7 +407,23 @@ class BaseScreen(Frame):
     def new_party_member(self):
         self.partymembers +=1
         self.emptylabel.config(text = f"A new member joined your party! There are now {self.partymembers} members in your party.")
-
+    
+    def destroy_okay_lucky(self):
+        self.luck_vspacing.destroy()
+        self.luck_vspacing2.destroy()
+        self.AM_btn.destroy()
+        self.NZ_btn.destroy()
+        self.okay.destroy()
+        self.luckytext.destroy()
+        self.endluck_vspacing.destroy()
+        self.endluck_spacing2.destroy()
+        self.create_base_widgets()
+    
+    def destroy_create_luck_widgets(self):
+        self.luck_vspacing.destroy()
+        self.luck_vspacing2.destroy()
+        self.AM_btn.destroy()
+        self.NZ_btn.destroy()
 
     def destroy_base_widgets_for_luck(self):
         self.destroy_base_widgets()
@@ -444,12 +450,6 @@ class BaseScreen(Frame):
 
         self.NZ_btn = Button(self, text = "N-Z", font = "Luminari 30", width = 15, command = self.lucknz)
         self.NZ_btn.grid(row=2,column=1,sticky=W)
-
-    def destroy_create_luck_widgets(self):
-        self.luck_vspacing.destroy()
-        self.luck_vspacing2.destroy()
-        self.AM_btn.destroy()
-        self.NZ_btn.destroy()
 
     def luckam(self):
         # self.columnconfigure(0,weight=2)
@@ -492,14 +492,14 @@ class BaseScreen(Frame):
     def luckred(self):
         self.destroy_create_luck_widgets()
         
-        self.okay_vspacing=Label(self,text="",height=13)
-        self.okay_vspacing.grid(row=0,column=0,columnspan=2, sticky=E)
+        self.endluck_vspacing=Label(self,text="",height=13)
+        self.endluck_vspacing.grid(row=0,column=0,columnspan=2, sticky=E)
 
         self.health = 5
         self.luckytext.config(text = f"You made your choices.\n Your health is now at 5.\n\nGood luck surviving.\nIf you can. MWAHAHAHAHA",font="Luminari 30",width=70)
 
-        self.okay_spacing2=Label(self, text="", height=5)
-        self.okay_spacing2.grid(row=2, column=0, sticky=E,columnspan=2)
+        self.endluck_spacing2=Label(self, text="", height=5)
+        self.endluck_spacing2.grid(row=2, column=0, sticky=E,columnspan=2)
 
         self.okay=Button(self,text="Okay", font="Luminari 30", command=self.destroy_okay_lucky,width=10,height=2)
         self.okay.grid(row=3,column=0,sticky=N,columnspan=2)     
@@ -507,14 +507,14 @@ class BaseScreen(Frame):
     def luckblue(self):
         self.destroy_create_luck_widgets()
 
-        self.okay_vspacing=Label(self,text="",height=13)
-        self.okay_vspacing.grid(row=0,column=0,sticky=E,columnspan=2)
+        self.endluck_vspacing=Label(self,text="",height=13)
+        self.endluck_vspacing.grid(row=0,column=0,sticky=E,columnspan=2)
 
-        self.supplies = 95
+        self.health = 95
         self.luckytext.config(text = f"You made your choices.\n Your health is now at 95.\n\nYou, are very lucky.\nGood luck with survival...sigh",font="Luminari 30",width=70)
 
-        self.okay_spacing2=Label(self, text="", height=5)
-        self.okay_spacing2.grid(row=2, column=0, sticky=E,columnspan=2)
+        self.endluck_spacing2=Label(self, text="", height=5)
+        self.endluck_spacing2.grid(row=2, column=0, sticky=E,columnspan=2)
 
         self.okay=Button(self,text="Okay", font="Luminari 30", command=self.destroy_okay_lucky,width=10,height=2)
         self.okay.grid(row=3,column=0,columnspan=2)
@@ -541,15 +541,15 @@ class BaseScreen(Frame):
     def luckschool(self):
         self.destroy_create_luck_widgets()
 
-        self.okay_vspacing=Label(self,text="",height=13)
-        self.okay_vspacing.grid(row=0,column=0,sticky=E,columnspan=2)
+        self.endluck_vspacing=Label(self,text="",height=13)
+        self.endluck_vspacing.grid(row=0,column=0,sticky=E,columnspan=2)
 
         self.health = random.randint(1,10)
         self.supplies = random.randint(1,10)
         self.luckytext.config(text = f"Why would you do that?!?\n Your health is now at {str(self.health)}.\n Your supplies are at {str(self.supplies)}\n\nHonestly, you are hopeless.\nSee you around... If you're around",font="Luminari 30",width=70)
 
-        self.okay_spacing2=Label(self, text="", height=2)
-        self.okay_spacing2.grid(row=2, column=0, sticky=E,columnspan=2)
+        self.endluck_spacing2=Label(self, text="", height=2)
+        self.endluck_spacing2.grid(row=2, column=0, sticky=E,columnspan=2)
 
         self.okay=Button(self,text="Okay", font="Luminari 30", command=self.destroy_okay_lucky,width=10,height=2)
         self.okay.grid(row=3,column=0,columnspan=2)     
@@ -557,14 +557,14 @@ class BaseScreen(Frame):
     def luckfood(self):
         self.destroy_create_luck_widgets()
 
-        self.okay_vspacing=Label(self,text="",height=13)
-        self.okay_vspacing.grid(row=0,column=0,sticky=E,columnspan=2)
+        self.endluck_vspacing=Label(self,text="",height=13)
+        self.endluck_vspacing.grid(row=0,column=0,sticky=E,columnspan=2)
 
         self.supplies = random.randint(30,50)
         self.luckytext.config(text = f"I like food too.\n Buuuuut I think you need to keep a healthy diet.\n\nYour food supply is at {str(self.supplies)}.\nWhat you eat is very important",font="Luminari 30",width=70)
 
-        self.okay_spacing2=Label(self, text="", height=2)
-        self.okay_spacing2.grid(row=2, column=0, sticky=E,columnspan=2)
+        self.endluck_spacing2=Label(self, text="", height=2)
+        self.endluck_spacing2.grid(row=2, column=0, sticky=E,columnspan=2)
 
         self.okay=Button(self,text="Okay", font="Luminari 30", command=self.destroy_okay_lucky,width=10,height=2)
         self.okay.grid(row=3,column=0,columnspan=2)
@@ -610,8 +610,8 @@ class BaseScreen(Frame):
     def luck16(self):
         self.destroy_create_luck_widgets()
 
-        self.okay_vspacing=Label(self,text="",height=13)
-        self.okay_vspacing.grid(row=0,column=0,sticky=E,columnspan=2)
+        self.endluck_vspacing=Label(self,text="",height=13)
+        self.endluck_vspacing.grid(row=0,column=0,sticky=E,columnspan=2)
 
         self.dice = random.randint(0,1)
         if self.dice == 0:
@@ -620,8 +620,8 @@ class BaseScreen(Frame):
             self.health = 100
         self.luckytext.config(text = f"I can't believe you tried to gamble your health.\n Your health is now at {str(self.health)}.\n\nYou know, it was a 1 or 100.\nI really don't know if it was worth it.",font="Luminari 30",width=70)
 
-        self.okay_spacing2=Label(self, text="", height=2)
-        self.okay_spacing2.grid(row=2, column=0, sticky=E,columnspan=2)
+        self.endluck_spacing2=Label(self, text="", height=2)
+        self.endluck_spacing2.grid(row=2, column=0, sticky=E,columnspan=2)
 
         self.okay=Button(self,text="Okay", font="Luminari 30", command=self.destroy_okay_lucky,width=10,height=2)
         self.okay.grid(row=3,column=0,columnspan=2)     
@@ -629,8 +629,8 @@ class BaseScreen(Frame):
     def luck712(self):
         self.destroy_create_luck_widgets()
 
-        self.okay_vspacing=Label(self,text="",height=13)
-        self.okay_vspacing.grid(row=0,column=0,sticky=E,columnspan=2)
+        self.endluck_vspacing=Label(self,text="",height=13)
+        self.endluck_vspacing.grid(row=0,column=0,sticky=E,columnspan=2)
 
         self.dice = random.randint(0,1)
         if self.dice == 0:
@@ -639,8 +639,8 @@ class BaseScreen(Frame):
             self.supplies = 100
         self.luckytext.config(text = f"You gambled whaaaat?\n Your supplies?!?\n\nYour supply level is at {str(self.supplies)}.\nJust know, if you don't have any supplies, you may just...",font="Luminari 30",width=70)
 
-        self.okay_spacing2=Label(self, text="", height=2)
-        self.okay_spacing2.grid(row=2, column=0, sticky=E,columnspan=2)
+        self.endluck_spacing2=Label(self, text="", height=2)
+        self.endluck_spacing2.grid(row=2, column=0, sticky=E,columnspan=2)
 
         self.okay=Button(self,text="Okay", font="Luminari 30", command=self.destroy_okay_lucky,width=10,height=2)
         self.okay.grid(row=3,column=0,columnspan=2)
@@ -666,13 +666,14 @@ class BaseScreen(Frame):
 
     def lucky(self):
         self.destroy_create_luck_widgets()
-        self.okay_vspacing=Label(self,text="",height=13)
-        self.okay_vspacing.grid(row=0,column=0,sticky=E,columnspan=2)
+        self.endluck_vspacing=Label(self,text="",height=13)
+        self.endluck_vspacing.grid(row=0,column=0,sticky=E,columnspan=2)
 
+        self.health = 75
         self.luckytext.config(text = f"Wow...\n You cheated, didn't you\n Your health is now at 75.\n\nJust know I'm not encouraging cheating.\nThere just is that tiny possibility you actually knew...(wink)",font="Luminari 30",width=70)
 
-        self.okay_spacing2=Label(self, text="", height=2)
-        self.okay_spacing2.grid(row=2, column=0, sticky=E,columnspan=2)
+        self.endluck_spacing2=Label(self, text="", height=2)
+        self.endluck_spacing2.grid(row=2, column=0, sticky=E,columnspan=2)
 
         self.okay=Button(self,text="Okay", font="Luminari 30", command=self.destroy_okay_lucky,width=10,height=2)
         self.okay.grid(row=3,column=0,columnspan=2)     
@@ -680,15 +681,15 @@ class BaseScreen(Frame):
     def luckn(self):
         self.destroy_create_luck_widgets()
         
-        self.okay_vspacing=Label(self,text="",height=13)
-        self.okay_vspacing.grid(row=0,column=0,sticky=E,columnspan=2)
+        self.endluck_vspacing=Label(self,text="",height=13)
+        self.endluck_vspacing.grid(row=0,column=0,sticky=E,columnspan=2)
 
         self.health = 100
         self.supplies = 100
         self.luckytext.config(text = f"You didn't know...\nWell, cows can grow up to 6ft 4in.\nBut since you were sincere,\n\nYour health is at {str(self.health)}.\nYour supply is at {str(self.supplies)}.",font="Luminari 30",width=70)
 
-        self.okay_spacing2=Label(self, text="", height=2)
-        self.okay_spacing2.grid(row=2, column=0, sticky=E,columnspan=2)
+        self.endluck_spacing2=Label(self, text="", height=2)
+        self.endluck_spacing2.grid(row=2, column=0, sticky=E,columnspan=2)
 
         self.okay=Button(self,text="Okay", font="Luminari 30", command=self.destroy_okay_lucky,width=10,height=2)
         self.okay.grid(row=3,column=0,columnspan=2)
