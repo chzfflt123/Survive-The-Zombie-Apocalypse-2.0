@@ -285,6 +285,12 @@ class BaseScreen(Frame):
         self.char_lbl=Label(self, image = self.image_char)
         self.char_lbl.x = self.image_char
         self.char_lbl.place(x=0, y=0)
+        self.rlabel = Label(self, text="", width=25, height=100, bg="#7E6E6F")
+        self.rlabel.grid(row=0, column=8, pady=20)
+
+        self.filler = Label(self,text="",width=1000)
+        self.filler.grid(column=0,row=0,sticky=E)
+
     
     def kill_to_base(self):
         self.create_base_widgets()
@@ -326,6 +332,8 @@ class BaseScreen(Frame):
         self.char_lbl=Label(self, image = self.image_char)
         self.char_lbl.x = self.image_char
         self.char_lbl.place(x=0, y=0)
+        self.rlabel = Label(self, text="", width=25, height=100, bg="#7E6E6F")
+        self.rlabel.grid(row=0, column=8, pady=20)
 
     def die_battle(self):
         self.destroy_battle_widgets()
