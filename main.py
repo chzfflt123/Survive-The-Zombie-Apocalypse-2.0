@@ -53,7 +53,7 @@ class Main (object):
         self.setup_bg_info_screen()
 
 
-    def setup_bg_info_screen(self):
+    """def setup_bg_info_screen(self):
         ''' This method is called to set up the Battle screen. '''
         # Changes the window's title
         self.root.title ("Background Info")
@@ -65,7 +65,7 @@ class Main (object):
     def onclose_bg_info_screen (self):
         # Destroy the entire program's window, which includes the Battle screen.
         self.current_screen.destroy()
-        self.setup_base()
+        self.setup_base()"""
 
     def setup_base(self):
         ''' This method is called to set up the Battle screen. '''

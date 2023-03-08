@@ -11,6 +11,90 @@ class BaseScreen(Frame):
         super(BaseScreen, self).__init__(master)
         self.grid()
         self.firsttime()
+        self.create_bginfo_widgets()
+    
+    def create_bginfo_widgets(self):
+
+        self.image123 = PhotoImage(file = "images/start_background.png")
+        self.background=Label(self, image = self.image123)
+        self.background.x = self.image123
+        self.background.place(x=0, y=0)
+
+        self.spacing0=Label(self,text="",width=140)
+        self.spacing0.grid(row=0,column=0)
+
+        self.spacing1=Label(self,text="",height=5)
+        self.spacing1.grid(row=1,column=0,sticky=E)
+
+        self.heading = Label(self, text="Background Information", font="Luminari 42 bold", fg="black",width=35)
+        self.heading.grid(row=2, column=0)
+
+        self.spacing3=Label(self,text=" ",height=3)
+        self.spacing3.grid(row=3,column=0,sticky=E)
+
+        padding=12
+
+        self.text1 = Label(self, text="Year 2845, the Gods have abandoned human civilization. No one knows what exactly", font="Luminari 24")
+        self.text1.grid(row=4, column=0, columnspan=4, pady=(0, padding))
+        self.text2 = Label(self, text="happened. Just that one day, half the population vanished, and the animals turned", font="Luminari 24")
+        self.text2.grid(row=5, column=0, columnspan=4, pady=(0, padding))
+        self.text3 = Label(self, text="feral. Their eyes turned horrifying red, and their mouths drizzled with their", font="Luminari 24")
+        self.text3.grid(row=6, column=0, columnspan=4, pady=(0, padding))
+        self.text4 = Label(self, text="saliva, their wanting for blood. Even the pets kept in individuals\' households", font="Luminari 24")
+        self.text4.grid(row=7, column=0, columnspan=4, pady=(0, padding))
+        self.text5 = Label(self, text="turned this way, and those who smiled and hugged their pets were bitten. Those", font="Luminari 24")
+        self.text5.grid(row=8, column=0, columnspan=4, pady=(0, padding))
+        self.text6 = Label(self, text="who were bitten, then took the form of more horrifying creatures that can no", font="Luminari 24")
+        self.text6.grid(row=9, column=0, columnspan=4, pady=(0, padding))
+        self.text7 = Label(self, text="longer be called \'human\'.", font="Luminari 24")
+        self.text7.grid(row=10, column=0, columnspan=4, pady=(0, padding))
+
+        self.spacingxx=Label(self,text="",height=3)
+        self.spacingxx.grid(row=11,column=0,sticky=E)
+
+        self.next_button = Button(self, text="Next", font = "Luminari 20", command=self.bg_to_base, width=12, height=2, bg="#A0A0A0") # add the command later
+        self.next_button.grid(row=12,column=0,sticky=N)
+
+        self.spacingyy=Label(self,text="",height=100)
+        self.spacingyy.grid(row=13,column=0,sticky=E)
+
+        health_style = ttk.Style()
+        health_style.theme_use('default')
+        health_style.configure("health.Horizontal.TProgressbar", background='#00FF2B')
+
+        supplies_style = ttk.Style()
+        supplies_style.theme_use('default')
+        supplies_style.configure("supplies.Horizontal.TProgressbar", background='blue')
+
+        self.bar = Progressbar(self, length=360, style='health_style.Horizontal.TProgressbar')
+        self.bar['value'] = 100
+        self.bar.grid(column=100, row=14, padx = 10, pady=(10, 0), sticky=W)
+
+        self.bar2 = Progressbar(self, length=360, style='supplies_style.Horizontal.TProgressbar', mode="determinate")
+        self.bar2['value'] = 100
+        self.bar2.grid(column=100, row=14, padx = 10, sticky=W)
+    
+    def destroy_bginfo_widgets(self):
+        self.background.destroy()
+        self.spacing0.destroy()
+        self.spacing1.destroy()
+        self.heading.destroy()
+        self.spacing3.destroy()
+        self.text1.destroy()
+        self.text2.destroy()
+        self.text3.destroy()
+        self.text4.destroy()
+        self.text5.destroy()
+        self.text6.destroy()
+        self.text7.destroy()
+        self.spacingxx.destroy()
+        self.spacingyy.destroy()
+        self.next_button.destroy()
+        self.bar.destroy()
+        self.bar2.destroy()
+    
+    def bg_to_base(self):
+        self.destroy_bginfo_widgets()
         self.create_base_widgets()
         
     
@@ -59,21 +143,21 @@ class BaseScreen(Frame):
             self.dog_lbl.x = self.dog
             self.dog_lbl.place(x=710, y=450)
 
-        health = ttk.Style()
-        health.theme_use('default')
-        health.configure("health.Horizontal.TProgressbar", background='#00FF2B')
+        health_style = ttk.Style()
+        health_style.theme_use('default')
+        health_style.configure("health_style.Horizontal.TProgressbar", background='#00FF2B')
 
-        supplies = ttk.Style()
-        supplies.theme_use('default')
-        supplies.configure("supplies.Horizontal.TProgressbar", background='blue')
+        supplies_style = ttk.Style()
+        supplies_style.theme_use('default')
+        supplies_style.configure("supplies_style.Horizontal.TProgressbar", background='blue')
 
-        self.bar = Progressbar(self, length=360, style='health.Horizontal.TProgressbar')
+        self.bar = Progressbar(self, length=360, style='health_style.Horizontal.TProgressbar')
         self.bar['value'] = self.health
         self.bar.grid(column=0, row=0, padx = 10, pady=(10, 0), sticky=W)
         self.healthlb = Label(self, text="Health: " + str(self.health), font="Ariel 10")
         self.healthlb.grid(row=1, column=0, padx=6.5, sticky=W)
 
-        self.bar2 = Progressbar(self, length=360, style='supplies.Horizontal.TProgressbar', mode="determinate")
+        self.bar2 = Progressbar(self, length=360, style='supplies_style.Horizontal.TProgressbar', mode="determinate")
         self.bar2['value'] = self.supplies
         self.bar2.grid(column=0, row=2, padx = 10, sticky=W)
         self.supplieslb = Label(self, text="Supplies: "+str(self.supplies), font="Ariel 10")
