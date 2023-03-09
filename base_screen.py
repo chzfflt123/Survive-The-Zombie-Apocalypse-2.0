@@ -596,8 +596,8 @@ class BaseScreen(Frame):
         self.endluck_vspacing=Label(self,text="",height=13)
         self.endluck_vspacing.grid(row=0,column=0,columnspan=2, sticky=E)
 
-        self.health = 5
-        self.luckytext = Label(self,text=f"You made your choices.\n Your health is now at 5.\n\nGood luck surviving.\nIf you can. MWAHAHAHAHA",font="Luminari 30",width=70)
+        self.health = random.randint(3, 10)
+        self.luckytext = Label(self,text=f"You made your choices.\n Your health is now at {str(self.health)}.\n\nGood luck surviving.\nIf you can. MWAHAHAHAHA",font="Luminari 30",width=70)
         self.luckytext.grid(row=1, column=0, columnspan=2, sticky=N)
 
         self.endluck_spacing2=Label(self, text="", height=5)
@@ -612,8 +612,8 @@ class BaseScreen(Frame):
         self.endluck_vspacing=Label(self,text="",height=13)
         self.endluck_vspacing.grid(row=0,column=0,sticky=E,columnspan=2)
 
-        self.health = 95
-        self.luckytext = Label(self,text=f"You made your choices.\n Your health is now at 95.\n\nYou, are very lucky.\nGood luck with survival...sigh",font="Luminari 30",width=70)
+        self.health = random.randint(90, 97)
+        self.luckytext = Label(self,text=f"You made your choices.\n Your health is now at {str(self.health)}.\n\nYou, are very lucky.\nGood luck with survival...sigh",font="Luminari 30",width=70)
         self.luckytext.grid(row=1, column=0, columnspan=2, sticky=N)
 
         self.endluck_spacing2=Label(self, text="", height=5)
@@ -777,9 +777,9 @@ class BaseScreen(Frame):
         self.endluck_vspacing=Label(self,text="",height=13)
         self.endluck_vspacing.grid(row=0,column=0,sticky=E,columnspan=2)
 
-        self.health = 75
+        self.health = random.randint(70,80)
 
-        self.luckytext = Label(self, text=f"Wow...\n You cheated, didn't you\n Your health is now at 75.\n\nJust know I'm not encouraging cheating.\nThere just is that tiny possibility you actually knew...(wink)",font="Luminari 30",width=70)
+        self.luckytext = Label(self, text=f"Wow...\n You cheated, didn't you\n Your health is now at {str(self.health)}.\n\nJust know I'm not encouraging cheating.\nThere just is that tiny possibility you actually knew...(wink)",font="Luminari 30",width=70)
         self.luckytext.grid(row=1, column=0, columnspan=2, sticky=N)
 
         self.endluck_spacing2=Label(self, text="", height=2)
