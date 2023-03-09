@@ -50,7 +50,8 @@ class Main (object):
         self.current_screen.destroy()
 
         # Continue on - set up the Battle screen!
-        self.setup_bg_info_screen()
+        # self.setup_bg_info_screen()
+        self.setup_base()
 
 
     """def setup_bg_info_screen(self):
