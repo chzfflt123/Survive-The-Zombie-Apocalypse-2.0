@@ -409,6 +409,9 @@ class BaseScreen(Frame):
 
         self.okay=Button(self,text="Okay", font="Luminari 30", command=self.destroy_okay,width=20,height=2)
         self.okay.grid(row=3,column=0)
+        skip = input()
+        if skip == "victory":
+            self.live()
     
     def die_base(self):
         self.destroy_base_widgets()
